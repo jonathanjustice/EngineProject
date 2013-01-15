@@ -11,11 +11,6 @@
 	import utilities.Actors.Avatar;
 	import utilities.Mathematics.QuadTree;
 	
-	//for testing
-	
-	import utilities.GraphicsElements.GraphicsElement;
-	import utilities.Actors.Actor;
-	
 	public class Game extends MovieClip{
 		public static var theGame;
 		public static var avatarManager;
@@ -29,16 +24,16 @@
 		private static var quadTree;
 		private static var gamePaused:Boolean=true;
 		private static var gameManager;
+		
 		//Not adding objects directly to stage so that I can manipulate the world globally when needed
 		//usually for things like zooming in and out, recentering the camera, etc.
 		public static var gameContainer;
 		
 		public function Game(){
-			//trace(Main.theStage);
 			theGame = this;
 			createGameContainer();
 			createQuadTree();
-			startGame("debug");
+			//startGame("debug");
 		}
 		
 		private static function createGameContainer():void{
@@ -51,6 +46,10 @@
 			quadTree = new utilities.Mathematics.QuadTree();
 		}
 		
+		public static function returnFocusToGameContainer(){
+			Main.theStage.focus = null;
+		}
+		
 		//star the game from various places, such as a loaded game, new game, restarted game, etc.
 		public static function startGame(startLocation:String){
 			switch(startLocation){
@@ -60,7 +59,7 @@
 					createManagersAndControllers();
 					enableMasterLoop();
 					break;
-				case "splash":
+				case "start":
 				
 					trace("Started Game: From the Start Screen");
 					createManagersAndControllers();
@@ -82,7 +81,7 @@
 					enableMasterLoop();
 					break;
 			}
-			//uiManager.showReturnToBase();
+			returnFocusToGameContainer();
 		}
 		
 		public static function enableMasterLoop(){
@@ -108,13 +107,21 @@
 		//this should get broken down into more stuff
 		private static function createManagersAndControllers(){
 			//createAvatar();
+			createLevelManager();
+			createLevelBuilder();
 			createAvatarManager();
 			createBulletManager();
 			createEnemyManager();
-			createLootManager();
-			createLevelManager();
-			createLevelBuilder();
 			createCombatManager();
+			createLootManager();
+		}
+		
+		private static function createLevelManager(){
+			levelManager = new LevelManager();
+		}
+		
+		private static function createLevelBuilder(){
+			levelBuilder = new utilities.Engine.Builders.LevelBuilder();
 		}
 		
 		private static function createAvatarManager(){
@@ -123,35 +130,21 @@
 		
 		private static function createBulletManager(){
 			bulletManager = new BulletManager();
-			bulletManager.setUp();
 		}
 		
 		private static function createEnemyManager(){
 			enemyManager = new EnemyManager();
-			enemyManager.setUp();
 		}
 		
 		private static function createCombatManager(){
 			combatManager = new CombatManager();
-			combatManager.setUp();
 		}
 		
 		private static function createLootManager(){
 			lootManager = new LootManager();
-			lootManager.setUp();
 		}
 		
-		private static function createLevelManager(){
-			levelManager = new LevelManager();
-			levelManager.setUp();
-		}
 		
-		private static function createLevelBuilder(){
-			levelBuilder = new utilities.Engine.Builders.LevelBuilder();
-			//levelBuilder.setUp();
-		}
-		
-		//
 		
 		private static function masterLoop(event:Event){
 			if(!gamePaused){
@@ -192,12 +185,12 @@
 		
 		public static function pauseGame(){
 			gamePaused = true;
-			//bulletManager.pauseAllBulletTimes()
+			bulletManager.pauseAllBulletTimes()
 		}
 		
 		public static function resumeGame(){
 			gamePaused = false;
-			//bulletManager.resumeAllBulletTimes()
+			bulletManager.resumeAllBulletTimes()
 		}
 		
 		public static function getBulletManager(){
@@ -208,10 +201,8 @@
 			return gameContainer;
 		}
 		
-		public static function addActorToGameContainer(actor){
-			//trace("Game:addActorToGameContainer:",actor);
+		/*public static function addActorToGameContainer(actor){
 			gameContainer.addChild(actor);
-			//trace(avatarManager);
-		}
+		}*/
 	}
 }

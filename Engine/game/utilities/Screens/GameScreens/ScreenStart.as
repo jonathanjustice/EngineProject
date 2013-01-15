@@ -1,46 +1,54 @@
-﻿package utilities.Screens{
+﻿package utilities.Screens.GameScreens{
 	import flash.events.MouseEvent;
 	import flash.events.*;
 	import flash.display.MovieClip;
+	import utilities.Screens.Screen_Default;
 	import utilities.Screens.Screen_Dynamic_Blocker;
-	import utilities.Engine.*;
-	import utilities.Engine.UIManager;
-	public class Screen_Default extends MovieClip{
-		public var uiManager;
+	import utilities.Engine.Game;
+	public class ScreenStart extends utilities.Screens.Screen_Default{
 		private var blocker;
 		private var myScreen;
 		
-		public function Screen_Default(){
-			//trace("super");
-			setUp();
+		public function ScreenStart(){
+			
 		}
 		
-		public function setUp(){
+		public override function clickHandler(event:MouseEvent){
+			//trace("parent:",event.target.parent.name);
+			//trace("target:",event.target.name);
+			switch (event.target){
+				
+				case myScreen.btn_start:
+				trace("clicked start screen");
+					removeThisScreen();
+					utilities.Engine.Game.startGame("start");
+					break;
+				/*case view.tab_store:
+					setScreenState("store",currentTab);
+					break;*/
+				
+			}
+		}
+		
+		public override function mouseEnabledHandler(){
+			myScreen.btn_start.buttonMode = true;
+			//Main.returnFocusToGampelay();
+		}
+		
+		public override function setScreen():void{
+			
 			//myScreen = screen_swf;
-			setScreen();
-			addDynamicBlocker();
-			addScreenGraphics();
-			addScreenToUIContainer();
-			addClickHandler();
-			addOverHandler();
-			addOutHandler();
-			mouseEnabledHandler();
+			myScreen = new Screen_Start();
+			trace("ScreenStart: myScreen is:",myScreen);
 		}
 		
-		public function setScreen():void{
-			//myScreen = screen_swf;
-			//trace(myScreen,"myScreen");
-		}
-		
-		public function addScreenGraphics():void{
-			//trace("this",this);
-			//trace("myScreen",myScreen);
-			//myScreen = new MovieClip();
+		public override function addScreenGraphics():void{
+			trace("ScreenStart: addScreenGraphics",myScreen);
 			this.addChild(myScreen);
 		}
 		
 		//CLICKING
-		public function addClickHandler(){
+		/*public function addClickHandler(){
 			this.addEventListener(MouseEvent.CLICK, clickHandler);
 		}
 		
@@ -65,10 +73,6 @@
 			
 		}
 		
-		public function mouseEnabledHandler(){
-			
-		}
-		
 		//MOUSING OUT
 		public function addOutHandler(){
 			this.addEventListener(MouseEvent.MOUSE_OUT, outHandler);
@@ -83,7 +87,7 @@
 		}
 		
 		private function addDynamicBlocker():void{
-			blocker = new utilities.Screens.Screen_Dynamic_Blocker;
+			blocker = new utilities.Screen_Dynamic_Blocker;
 			this.addChild(blocker)
 		}
 		
@@ -95,23 +99,13 @@
 			blocker.update_dynamic_blocker_because_the_screen_was_resized();
 		}
 		
-		/*public function addScreenToGame(){
-			//utilities.Engine.Game.gameContainer.addChild(this);
-			utilities.Engine.UIManager.uiContainer.addChild(this);
-			
-		}
-		*/
-		public function addScreenToUIContainer(){
-			utilities.Engine.UIManager.uiContainer.addChild(this);
-		}
-		
 		//removing the screen
 		public function removeThisScreen(){
 			removeOutHandler();
 			removeOverHandler();
-			removeClickHandler();
+			removeMouseHandler();
 			removeDynamicBlocker();
-			utilities.Engine.UIManager.uiContainer.removeChild(this);
-		}
+			uiManager.removeScreen(this);
+		}*/
 	}
 }

@@ -22,7 +22,7 @@
 		public static var lootFactory = new Factory_Loot();
 		public function LootManager(){
 			//trace("loot manager");
-			
+			setUp();
 		}
 		
 		public function setUp(){

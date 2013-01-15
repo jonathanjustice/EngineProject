@@ -1,28 +1,39 @@
 ﻿package utilities.Engine{
 	import utilities.Screens.xpBarSystem;
-	import utilities.Mathematics.MathFormulas;
 	import utilities.Screens.Screen_Default;
+	import utilities.Screens.UIContainer;
+	import utilities.Screens.GameScreens.ScreenStart;
+	import utilities.Engine.DefaultManager;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	public class UIManager {
-		private var uiContainer;
-		//private var xpBar = new ExperienceBar;
+	public class UIManager extends utilities.Engine.DefaultManager{
+		public static var uiContainer = new utilities.Screens.UIContainer();
 		private var padding:int=11;
 		private var screen_LevelUp;
-		//private var screen_ReturnToBase = new Screen_ReturnToBase;;
+		
+		private var screenStart;
+		
 		public function UIManager(){
-			
+			setUp();
 		}
 		
-		
-		
 		public function setUp(){
-			var uiContainer = new MovieClip;
+			Main.theStage.addChild(uiContainer);
 			//uiContainer = new UIContainer;
 			//Main.theStage.addChild(uiContainer);
 			//setUpXpBar();
 			
 		}
+		
+		public function getUIContainer():Object{
+			return uiContainer;
+		}
+		
+		public function openStartScreen(){
+			screenStart = new ScreenStart();
+			trace("start");
+		}
+		
 		/*
 		private function setUpXpBar(){
 			xpBar.x = uiContainer.width - xpBar.width - (1.25*padding) - screen_ReturnToBase.width;//locate it in the upper right hand corner
@@ -38,7 +49,7 @@
 			
 		}
 		
-		public function updateLoop(){
+		public override function updateLoop(){
 			/*xpBar.txt_xp.text = xpBarSystem.get_CurrentXP() + " / " + xpBarSystem.get_Next_Levels_Required_XP();//update the text display
 			//xpBar.inner_bar.scaleX = xpBarSystem.get_percent_xp_to_level();//update the xp bar graphic
 			

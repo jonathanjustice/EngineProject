@@ -25,7 +25,7 @@ package utilities.Engine.Combat{
 		private static var currentDelay:int = 0;
 		private static var delay:int = 1;
 		public function BulletManager(){
-			
+			setUp();			
 		}
 		
 		public function setUp(){

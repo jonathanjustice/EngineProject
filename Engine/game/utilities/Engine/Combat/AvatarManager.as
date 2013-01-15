@@ -9,6 +9,10 @@
 		public static var avatar;
 		public static var avatars:Array;
 		public function AvatarManager(){
+			setUp();			
+		}
+		
+		private function setUp(){
 			avatars =[];
 			createAvatar();
 		}

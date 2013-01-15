@@ -7,19 +7,19 @@
 		public static var level;
 		public static var levels:Array;
 		public function LevelManager(){
-			levels =[];
-			createLevel();
-			trace("level manager");
+			setUp();
 		}
 		
 		public function setUp(){
+			levels =[];
+			createLevel();
 			create_a_bunch_of_walls_forTesting();
 		}
 		
 		public function create_a_bunch_of_walls_forTesting(){
-			var theX:Number = 100;
-			var theY:Number = 100;
-			for(var i:int=0;i<10;i++){
+			var theX:Number = 50;
+			var theY:Number = 50;
+			for(var i:int=0;i<5;i++){
 				theX+=50;
 				theY+=50;
 				var wall = new Wall();

@@ -1,9 +1,8 @@
 ﻿package utilities.Actors.GameBoardPieces{
-	import flash.display.MovieClip;
-	import flash.geom.Point;
 	import utilities.Actors.Actor;
 
 	public class Wall extends utilities.Actors.Actor{
+		private var isBulletBlocker:Boolean=false;;
 		public function Wall(){
 			setUp();
 		}

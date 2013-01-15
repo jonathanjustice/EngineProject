@@ -13,7 +13,7 @@
 	import flash.geom.Point;
 	public class CombatManager extends utilities.Engine.DefaultManager{
 		public function CombatManager(){
-			
+			setUp();			
 		}
 		
 		public function setUp(){

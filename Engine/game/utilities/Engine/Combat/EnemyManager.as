@@ -20,7 +20,7 @@
 		private static var numnum:Number=0;
 		
 		public function EnemyManager(){
-			
+			setUp();
 		}
 		
 		public function setUp(){

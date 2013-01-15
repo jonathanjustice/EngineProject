@@ -1,4 +1,4 @@
-﻿package utilities{
+﻿package utilities.Screens{
 	import flash.events.MouseEvent;
 	import flash.events.*;
 	import flash.display.Sprite;

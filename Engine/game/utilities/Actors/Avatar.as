@@ -31,8 +31,8 @@
 		public function setUp(){
 			addActorToGameEngine();
 			defineGraphics();
-			this.x=250;
-			this.y=400;
+			this.x=450;
+			this.y=250;
 		}
 		
 		public function getAvatarLocation():Point{

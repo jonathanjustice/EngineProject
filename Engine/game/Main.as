@@ -22,6 +22,7 @@
 		public function Main():void {
 			if (stage) init();
             else addEventListener(Event.ADDED_TO_STAGE, init);
+			trace(stage);
 		}
 		
 		//once the stage exists, launch the game
@@ -38,6 +39,7 @@
 			createKeyInputManager();
 			createUIManager();
 			createTheGameEngine();
+			openStartScreen();
 		}
 		
 		//make sure to get rid of this eventually
@@ -46,26 +48,29 @@
 			theStage = this.stage;
 		}
 		
-		private function createTheGameEngine():void{
-			game = new utilities.Engine.Game();
+		private function createKeyInputManager():void{
+			//trace("the input manager exists")
+			keyInputManager = new utilities.Input.KeyInputManager();
 		}
 		
 		private static function createUIManager(){
 			uiManager = new UIManager()
-			uiManager.setUp();
 		}
 		
-		private function createKeyInputManager():void{
-			//trace("the input manager exists")
-			keyInputManager = new utilities.Input.KeyInputManager();
+		private function createTheGameEngine():void{
+			game = new utilities.Engine.Game();
+		}
+		
+		private function openStartScreen(){
+			uiManager.openStartScreen();
 		}
 		
 		//If you lose focus, you can use this to regain it to the stage
 		//useful when you click on buttons or click outside the game
 		public static function returnFocusToGampelay(){
 			theStage.focus = null;
-			theStage.focus = Main.theStage;
+			//theStage.focus = Main.theStage;
+			game.returnFocusToGameContainer();
 		}
-		
 	}
 }
