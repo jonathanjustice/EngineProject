@@ -13,7 +13,7 @@
 			
 		}
 		
-		public override function clickHandler(event:MouseEvent){
+		public override function clickHandler(event:MouseEvent):void{
 			//trace("parent:",event.target.parent.name);
 			//trace("target:",event.target.name);
 			switch (event.target){
@@ -30,13 +30,17 @@
 			}
 		}
 		
-		public override function mouseEnabledHandler(){
+		
+		//is there a way to make this more abstract?
+		//check for everything that is a button when the screen is created?
+		public override function mouseEnabledHandler():void{
 			myScreen.btn_start.buttonMode = true;
-			//Main.returnFocusToGampelay();
 		}
 		
+		//is there a way to make this more abstract?
+		//could pass in the screen in setUp or when its loaded
 		public override function setScreen():void{
-			
+			//replace this with the swf once there is a swf loading class
 			//myScreen = screen_swf;
 			myScreen = new Screen_Start();
 			trace("ScreenStart: myScreen is:",myScreen);
@@ -46,66 +50,5 @@
 			trace("ScreenStart: addScreenGraphics",myScreen);
 			this.addChild(myScreen);
 		}
-		
-		//CLICKING
-		/*public function addClickHandler(){
-			this.addEventListener(MouseEvent.CLICK, clickHandler);
-		}
-		
-		public function removeClickHandler(){
-			this.removeEventListener(MouseEvent.CLICK, clickHandler);
-		}
-		
-		public function clickHandler(event:MouseEvent){
-			
-		}
-		
-		//MOUSEING OVER
-		public function addOverHandler(){
-			this.addEventListener(MouseEvent.MOUSE_OVER, overHandler);
-		}
-		
-		public function removeOverHandler(){
-			this.removeEventListener(MouseEvent.MOUSE_OVER, overHandler);
-		}
-		
-		public function overHandler(event:MouseEvent){
-			
-		}
-		
-		//MOUSING OUT
-		public function addOutHandler(){
-			this.addEventListener(MouseEvent.MOUSE_OUT, outHandler);
-		}
-		
-		public function removeOutHandler(){
-			this.removeEventListener(MouseEvent.MOUSE_OUT, outHandler);
-		}
-		
-		public function outHandler(event:MouseEvent){
-			
-		}
-		
-		private function addDynamicBlocker():void{
-			blocker = new utilities.Screen_Dynamic_Blocker;
-			this.addChild(blocker)
-		}
-		
-		private function removeDynamicBlocker():void{
-			this.removeChild(blocker);
-		}
-		
-		private function updateDynamicBlocker():void{
-			blocker.update_dynamic_blocker_because_the_screen_was_resized();
-		}
-		
-		//removing the screen
-		public function removeThisScreen(){
-			removeOutHandler();
-			removeOverHandler();
-			removeMouseHandler();
-			removeDynamicBlocker();
-			uiManager.removeScreen(this);
-		}*/
 	}
 }

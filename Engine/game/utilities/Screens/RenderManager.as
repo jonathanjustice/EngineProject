@@ -4,13 +4,13 @@
 			
 		}
 		
-		public function setUp(){
+		public function setUp():void{
 			
 		}
 		//testing working with bitmapdata
 		public function getBitmapData(){
 			//if the game already has some fun bitmap data, erase that business
-			if ( bmd ){
+			if (bmd){
 				bmd = null;
 			}
 			//target.width and target.height can also be replaced with a fixed number.

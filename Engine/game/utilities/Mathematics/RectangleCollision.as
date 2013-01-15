@@ -28,7 +28,7 @@ package utilities.Mathematics{
 		 }
 		 
 		//resolves collision between a stationary rectangle and a moving rectangle
-		 public static function resolveCollisionBetweenMovingAndStationaryObjects(movable,stationary){
+		 public static function resolveCollisionBetweenMovingAndStationaryObjects(movable,stationary):void{
 			//above
 			if(movable.getPreviousPosition().y + movable.height/2 <= stationary.getY() - stationary.height/2 && (movable.getPreviousPosition().x + movable.width/2 >=stationary.getX() - stationary.width/2 || movable.getPreviousPosition().x - movable.width/2 <=stationary.getX() + stationary.width/2))//above
 			{

@@ -94,7 +94,7 @@
 		public static const key_LEFT : uint = 37;
 		public static const key_RIGHT : uint = 39;
 		
-		public function KeyCodes(){
+		public function KeyCodes():void{
 		}
 	}
 }

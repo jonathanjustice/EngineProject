@@ -10,12 +10,12 @@
 		private var blocker;
 		private var myScreen;
 		
-		public function Screen_Default(){
+		public function Screen_Default():void{
 			//trace("super");
 			setUp();
 		}
 		
-		public function setUp(){
+		public function setUp():void{
 			//myScreen = screen_swf;
 			setScreen();
 			addDynamicBlocker();
@@ -40,24 +40,24 @@
 		}
 		
 		//CLICKING
-		public function addClickHandler(){
+		public function addClickHandler():void{
 			this.addEventListener(MouseEvent.CLICK, clickHandler);
 		}
 		
-		public function removeClickHandler(){
+		public function removeClickHandler():void{
 			this.removeEventListener(MouseEvent.CLICK, clickHandler);
 		}
 		
-		public function clickHandler(event:MouseEvent){
+		public function clickHandler(event:MouseEvent):void{
 			
 		}
 		
 		//MOUSEING OVER
-		public function addOverHandler(){
+		public function addOverHandler():void{
 			this.addEventListener(MouseEvent.MOUSE_OVER, overHandler);
 		}
 		
-		public function removeOverHandler(){
+		public function removeOverHandler():void{
 			this.removeEventListener(MouseEvent.MOUSE_OVER, overHandler);
 		}
 		
@@ -65,16 +65,16 @@
 			
 		}
 		
-		public function mouseEnabledHandler(){
+		public function mouseEnabledHandler():void{
 			
 		}
 		
 		//MOUSING OUT
-		public function addOutHandler(){
+		public function addOutHandler():void{
 			this.addEventListener(MouseEvent.MOUSE_OUT, outHandler);
 		}
 		
-		public function removeOutHandler(){
+		public function removeOutHandler():void{
 			this.removeEventListener(MouseEvent.MOUSE_OUT, outHandler);
 		}
 		
@@ -101,12 +101,12 @@
 			
 		}
 		*/
-		public function addScreenToUIContainer(){
+		public function addScreenToUIContainer():void{
 			utilities.Engine.UIManager.uiContainer.addChild(this);
 		}
 		
 		//removing the screen
-		public function removeThisScreen(){
+		public function removeThisScreen():void{
 			removeOutHandler();
 			removeOverHandler();
 			removeClickHandler();

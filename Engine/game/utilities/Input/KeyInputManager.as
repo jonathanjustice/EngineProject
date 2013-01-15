@@ -25,12 +25,12 @@
 		private var Key_rotRight:Boolean = false;
 		private var Key_rotLeft:Boolean = false;
 		
-		public function KeyInputManager(){
+		public function KeyInputManager():void{
 			//keys = [];
 			setUp();
 		}
 		
-		public function setUp(){
+		public function setUp():void{
 			trace("keyinputmanager setup")
 			myAngle = 0;
 			Main.theStage.addEventListener(KeyboardEvent.KEY_UP, keyUpHandler);
@@ -38,12 +38,12 @@
 			isKeysEnabled = true;
 		}
 		
-		public function removeKeyListeners(){
+		public function removeKeyListeners():void{
 			Main.theStage.removeEventListener(KeyboardEvent.KEY_UP, keyUpHandler);
 			Main.theStage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 		}
 		
-		public function keyDownHandler(e:KeyboardEvent){
+		public function keyDownHandler(e:KeyboardEvent):void{
 			if(isKeysEnabled == true){
 				//trace(e.keyCode);
 				if(e.keyCode == KeyCodes.key_RIGHT_BRACKET){
@@ -89,7 +89,7 @@
 			//trace(e.keyCode);
 		}
 		
-		public function keyUpHandler(e:KeyboardEvent){
+		public function keyUpHandler(e:KeyboardEvent):void{
 			if(isKeysEnabled == true){
 				if(e.keyCode == KeyCodes.key_RIGHT_BRACKET){
 					Key_rightBracket=false;

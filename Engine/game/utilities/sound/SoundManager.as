@@ -16,12 +16,12 @@
 		private var musicSound:Sound = new Sound(new URLRequest("GuileTheme.mp3"));
 		public var sfxType:String = "";
 		
-		public function SoundPlayer(){
+		public function SoundPlayer():void{
 			
 			//requestSounds();
 		}
 		
-		public function setUpSounds(){
+		public function setUpSounds():void{
 			musicSound.addEventListener(Event.COMPLETE, LOAD_music);
 		}
 		
@@ -30,7 +30,7 @@
 			playMusic();
       	}
 		
-		public function playMusic(){
+		public function playMusic():void{
 			var musicVolume = .15;
 			var myTransform:SoundTransform = new SoundTransform(musicVolume,0);
             musicChannel.soundTransform = myTransform;
@@ -38,7 +38,7 @@
 			musicChannel.soundTransform = myTransform;
 		}
 		
-		public function stopAllSoundChannels(){
+		public function stopAllSoundChannels():void{
 			sxfChannel_01.stop();
 		}
 	}

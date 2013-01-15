@@ -29,7 +29,7 @@
 		//usually for things like zooming in and out, recentering the camera, etc.
 		public static var gameContainer;
 		
-		public function Game(){
+		public function Game():void{
 			theGame = this;
 			createGameContainer();
 			createQuadTree();
@@ -46,12 +46,8 @@
 			quadTree = new utilities.Mathematics.QuadTree();
 		}
 		
-		public static function returnFocusToGameContainer(){
-			Main.theStage.focus = null;
-		}
-		
 		//star the game from various places, such as a loaded game, new game, restarted game, etc.
-		public static function startGame(startLocation:String){
+		public static function startGame(startLocation:String):void{
 			switch(startLocation){
 				case "debug":
 				
@@ -69,8 +65,6 @@
 					enableMasterLoop();
 					break;
 				case "restart":
-					//game has been restarted
-					
 					//stop the loop while I clear everything out of it
 					disableMasterLoop();
 					//clear everything so it can be resetup
@@ -81,32 +75,26 @@
 					enableMasterLoop();
 					break;
 			}
-			returnFocusToGameContainer();
+			Main.returnFocusToGampelay();
 		}
 		
-		public static function enableMasterLoop(){
+		public static function enableMasterLoop():void{
 			gamePaused=false;
 			gameContainer.addEventListener(Event.ENTER_FRAME, masterLoop);
 		}
 		
-		public static function disableMasterLoop(){
+		public static function disableMasterLoop():void{
 			gamePaused=true;
 			gameContainer.removeEventListener(Event.ENTER_FRAME, masterLoop);
 		}
 		
 		//clear everything out of the arrays
 		//useful for restarting a level or the game
-		public static function clearGame(){
+		public static function clearGame():void{
 			
-			//gameContainer.removeChild(avatar);
-			//game.removeChild(pauseBtn);
-			//avatar = null;
-			//pauseBtn = null;
 		}
 		
-		//this should get broken down into more stuff
-		private static function createManagersAndControllers(){
-			//createAvatar();
+		private static function createManagersAndControllers():void{
 			createLevelManager();
 			createLevelBuilder();
 			createAvatarManager();
@@ -116,37 +104,37 @@
 			createLootManager();
 		}
 		
-		private static function createLevelManager(){
+		private static function createLevelManager():void{
 			levelManager = new LevelManager();
 		}
 		
-		private static function createLevelBuilder(){
+		private static function createLevelBuilder():void{
 			levelBuilder = new utilities.Engine.Builders.LevelBuilder();
 		}
 		
-		private static function createAvatarManager(){
+		private static function createAvatarManager():void{
 			avatarManager = new AvatarManager();
 		}
 		
-		private static function createBulletManager(){
+		private static function createBulletManager():void{
 			bulletManager = new BulletManager();
 		}
 		
-		private static function createEnemyManager(){
+		private static function createEnemyManager():void{
 			enemyManager = new EnemyManager();
 		}
 		
-		private static function createCombatManager(){
+		private static function createCombatManager():void{
 			combatManager = new CombatManager();
 		}
 		
-		private static function createLootManager(){
+		private static function createLootManager():void{
 			lootManager = new LootManager();
 		}
 		
 		
 		
-		private static function masterLoop(event:Event){
+		private static function masterLoop(event:Event):void{
 			if(!gamePaused){
 				updateAvatarManager();
 				updateBulletManager();
@@ -155,54 +143,49 @@
 				//updateCombatManager();
 				updateUIManager();
 			}else{
-				//can use this for when the game is paused but I still need to update UI stuff
+				//can use this section for when the game is paused but I still need to update UI stuff
 			}
 		}
 		
-		private static function updateAvatarManager(){
+		private static function updateAvatarManager():void{
 			avatarManager.updateLoop();
 		}
 		
-		private static function updateBulletManager(){
+		private static function updateBulletManager():void{
 			bulletManager.updateLoop();
 		}
 			
-		private static function updateEnemyManager(){
-			//var avatarLocation:Point = new Point(Main.avatar.x,Main.avatar.y);
+		private static function updateEnemyManager():void{
 			enemyManager.updateLoop();
 		}
 		
-		private static function updateLootManager(){
-			//var avatarLocation:Point = new Point(Main.avatar.x,Main.avatar.y);
+		private static function updateLootManager():void{
 			lootManager.updateLoop();
 		}
 		
-		
 		//for when you need to communicate things to the UI manager
-		private static function updateUIManager(){
-			//uiManager.updateLoop();
+		private static function updateUIManager():void{
+			Main.uiManager.updateLoop();
 		}
 		
-		public static function pauseGame(){
+		//pause the update loops
+		//pause any other specific things like, spawnTimes, decayRates etc. that are dependent on getTimer
+		public static function pauseGame():void{
 			gamePaused = true;
 			bulletManager.pauseAllBulletTimes()
 		}
 		
-		public static function resumeGame(){
+		public static function resumeGame():void{
 			gamePaused = false;
-			bulletManager.resumeAllBulletTimes()
+			bulletManager.resumeAllBulletTimes();
 		}
 		
-		public static function getBulletManager(){
+		public static function getBulletManager():Object{
 			return bulletManager;
 		}
 		
 		public static function getGameContainer():MovieClip{
 			return gameContainer;
 		}
-		
-		/*public static function addActorToGameContainer(actor){
-			gameContainer.addChild(actor);
-		}*/
 	}
 }

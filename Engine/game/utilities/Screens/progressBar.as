@@ -16,7 +16,7 @@
 			return currenProgress;
 		}
 		
-		private function progressComplete(){
+		private function progressComplete():void{
 			
 		}
 	}

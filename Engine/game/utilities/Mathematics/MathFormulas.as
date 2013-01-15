@@ -15,7 +15,6 @@ package utilities.Mathematics{
 			//Stand back I'm about to try Math!
 		}
 		
-		
 		//convert an angle to a 360 degree format instead of 0 to 180 or 0 to -180 format
 		public static function convertTo360Angle(vectorToNormalize):Number{
 			var convertedAngle:Number=0;
@@ -57,7 +56,6 @@ package utilities.Mathematics{
 			return dist;
 		}
 		
-		
 		//faster version, need to multiply min dist by itself in other file
 		public static function distanceFormulaOptimized(p1,p2){
 			var dist:Number;
@@ -65,15 +63,13 @@ package utilities.Mathematics{
 			return dist;
 		}
 		
-		//takes 2 points
+		//returns change in position that should be applied to 1 object due to gravity
 		public static function gravity(obj1, obj2,gravity):Point{
 			gravity=.65;
 			var xDiff:Number = obj1.x - obj2.x;//difference between 2 objects on x axis
 			var yDiff:Number = obj1.y - obj2.y;//diff between 2 objecgts on y axis
 			var fg:Number;//the force of gravity to be applied to the object
 			var gravConst:Number = gravity;//6.673 *10^-11; is set from the game class
-			//var m1:Number = obj1.mass;//the mass of object 1
-			//var m2:Number = obj2.mass;//the mass of object 2
 			var m1:Number = 25;//the mass of object 1
 			var m2:Number = 25;//the mass of object 2
 			var dist:Number = MathFormulas.distanceFormula(obj1,obj2)//distance between 2 objects
@@ -125,20 +121,12 @@ package utilities.Mathematics{
 				if ((vel_run * run + vel_rise * rise) >= 0) {
 					return;
 				}
-				//trace("normalX " + normalX);
-				//trace("run " + run);
-				//trace("distCollision " + distCollision);
-				//trace("normalY " + normalY);
-				//trace("rise " + rise);
+				
 				normalX=run/distCollision;
 				normalY=rise/distCollision;
 				dVector = (obj2.deltaX - obj1.deltaX) * normalX + (obj2.deltaY - obj1.deltaY) * normalY;
 				dvx= dVector*normalX;
 				dvy= dVector*normalY;
-				//trace("dVector " + dVector);
-				//trace("dvx " + dvx);
-				//trace("dvy " + dvy);
-				
 				
 				var addToDeltaX = dvx*bouncyness * multiplier;//the additional speed added to the deltas of the object
 				var addToDeltaY = dvy*bouncyness * multiplier;

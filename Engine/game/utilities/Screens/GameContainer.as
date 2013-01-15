@@ -1,11 +1,11 @@
 ﻿package utilities.Screens{
 	import flash.display.MovieClip;
 	public class GameContainer extends MovieClip{
-		public function GameContainer(){
+		public function GameContainer():void{
 			
 		}
 		
-		public function zoomToObjectInsideContainer(){
+		public function zoomToObjectInsideContainer():void{
 			//need to pass in object
 			
 			//determine point to zoom to

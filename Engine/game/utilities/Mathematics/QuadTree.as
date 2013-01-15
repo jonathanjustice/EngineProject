@@ -9,7 +9,7 @@
 		private static var node_2_2:Array=[512,512,512,1024];
 		private static var node;
 		
-		public function QuadTree(){
+		public function QuadTree():void{
 			
 		}
 		

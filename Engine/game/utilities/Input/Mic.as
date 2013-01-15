@@ -6,7 +6,7 @@
 	public class Mic extends Sprite{
 		private var micVolume:Number=0;
 		private var myMic:Microphone = Microphone.getMicrophone();
-		public function Mic(){
+		public function Mic():void{
 			//Security.showSettings(SecurityPanel.MICROPHONE);
 			myMic.setLoopBack(true);
 			myMic.setUseEchoSuppression(true);
@@ -14,7 +14,7 @@
 			
 		}
 		
-		private function update(e:Event){
+		private function update(e:Event):void{
 			micVolume = myMic.activityLevel;
 			//stage.line_mc.width = myMic.activityLevel;
 			//stage.activity_dyn.text = "Activity: " + String(myMic.activityLevel) + "%";
@@ -22,7 +22,7 @@
 			//trace(myMic.activityLevel);
 		}
 		
-		public function getMicVolume(){
+		public function getMicVolume():Number{
 			return micVolume;
 		}
 	}

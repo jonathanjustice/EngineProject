@@ -18,7 +18,6 @@
 
 		//check to see if the stage exists
 		//usually only necessary if this is on the web or deployed inside another swf
-		//just do it for safety
 		public function Main():void {
 			if (stage) init();
             else addEventListener(Event.ADDED_TO_STAGE, init);
@@ -34,7 +33,7 @@
 		//define the stage for use in other classes
 		//launch the engine
 		//set up a some important managers
-		private function initialSetup(){
+		private function initialSetup():void{
 			defineTheStage();
 			createKeyInputManager();
 			createUIManager();
@@ -53,7 +52,7 @@
 			keyInputManager = new utilities.Input.KeyInputManager();
 		}
 		
-		private static function createUIManager(){
+		private static function createUIManager():void{
 			uiManager = new UIManager()
 		}
 		
@@ -61,7 +60,7 @@
 			game = new utilities.Engine.Game();
 		}
 		
-		private function openStartScreen(){
+		private function openStartScreen():void{
 			uiManager.openStartScreen();
 		}
 		
@@ -69,8 +68,6 @@
 		//useful when you click on buttons or click outside the game
 		public static function returnFocusToGampelay(){
 			theStage.focus = null;
-			//theStage.focus = Main.theStage;
-			game.returnFocusToGameContainer();
 		}
 	}
 }
