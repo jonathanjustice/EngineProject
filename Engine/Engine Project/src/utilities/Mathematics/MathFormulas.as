@@ -16,11 +16,32 @@ package utilities.Mathematics{
 			//Stand back I'm about to try Math!
 		}
 		
+		/*public static function convertLocalPositionToGlobal(object):Point{
+			trace("O",object.x,object.y);
+			var globalPoint:Point = object.localToGlobal(new Point(0,0));
+			trace("GP",globalPoint);
+			return globalPoint;
+		}
+		*/
+		/*public static function convertLocalPositionToGlobal(point:Point):Point{
+			trace("O",point.x,point.y);
+			var globalPoint:Point = point.localToGlobal(point);
+			trace("GP",globalPoint);
+			return globalPoint;
+		}
+		
+		public static function convertGlobalPositionToLocal(object):Point{
+			trace("O",object.x,object.y);
+			var globalPoint:Point = object.globalToLocal(new Point(0,0));
+			trace("GP",globalPoint);
+			return globalPoint;
+		}*/
+		
 		//convert an angle to a 360 degree format instead of 0 to 180 or 0 to -180 format
-		public static function convertTo360Angle(vectorToNormalize:Number):Number{
+		public static function convertTo360Angle(angleToNormalize:Number):Number{
 			var convertedAngle:Number=0;
-			if(vectorToNormalize > -180 && vectorToNormalize <= -0){
-				convertedAngle = 360 + vectorToNormalize;
+			if(angleToNormalize > -180 && angleToNormalize <= -0){
+				convertedAngle = 360 + angleToNormalize;
 			}
 			return convertedAngle;
 		}
@@ -54,6 +75,16 @@ package utilities.Mathematics{
 			dist = Math.sqrt(dx*dx + dy*dy);
 			//trace(dist);
 			return dist;
+		}
+		
+		public static function Point_Object_At_Target(object:MovieClip,point:Point):void{
+			var distanceX : Number = object.x - point.x;
+			var distanceY : Number = object.y - point.y;
+			var angleInRadians : Number = Math.atan2(distanceY, distanceX);
+			var angleInDegrees : Number = angleInRadians * (180 / Math.PI)-90;
+			//return angleInDegrees;
+			//trace(angleInDegrees);
+			object.rotation = angleInDegrees;
 		}
 		
 		//faster version, need to multiply min dist by itself in other file

@@ -9,6 +9,7 @@
 	import utilities.Engine.Builders.LootManager;
 	import utilities.Actors.Stats.WeaponStats;
 	import utilities.GraphicsElements.GraphicsElement;
+	import utilities.Mathematics.MathFormulas;
 	import utilities.Mathematics.QuadTree;
 	import flash.geom.Point;
 	
@@ -36,10 +37,19 @@
 		//This needs to be put somewhere else, this is an awful place for it as long as I am using 1 giant master stats file
 		//might make sense once once things are more generative...
 		public function defineWeaponStats():void{
-			//trace("Actor:define stats");
 			weaponStats = new utilities.Actors.Stats.WeaponStats();
 		}
 		
+		//use this to ha
+		public function takeDamage(amount:Number):void{
+			this.health -= amount;
+		}
+		
+		public function checkForDamage():void{
+			if(health <= 0){
+				markDeathFlag();
+			}
+		}
 		
 		//flag actor for deletion, normally on death, collision or time out
 		public function markDeathFlag():void{
@@ -66,6 +76,10 @@
 					//removeActorFromGameEngine(this,Game.lootManager.getArray());;
 				}*/
 			}
+		}
+		
+		public function Point_Actor_At_Target(target:Point):void{
+			MathFormulas.Point_Object_At_Target(this,target);
 		}
 		
 		//DISPLAY & FEEDBACK SECTION
@@ -135,26 +149,24 @@
 			
 		}
 		
+		/*
+		*	GETTERS & SETTERS
+		*/
+		
 		public function getLocation():Point{
 			var point:Point=new Point(this.x,this.y);
 			return point;
 		}
-		
-		public function getX():Number{
-			return this.x;
-		}
-		
-		public function getY():Number{
-			return this.y;
-		}
-		
+
 		//useful for collision detection, in case the object gets into an invalid location
 		public function setPreviousPosition():void{
 			previousPosition.x = this.x;
 			previousPosition.y = this.y;
 		}
 		
-		//useful for collision detection, in case the object gets into an invalid location
+		//useful for collision detection
+		//in case the object gets into an invalid location
+		//you can use this to put it back where it was
 		public function getPreviousPosition():Point{
 			return previousPosition;
 		}
@@ -165,7 +177,7 @@
 			return this.rotation;
 		}
 		
-		
+		//use the quadtree class to figure out what node the actor is in
 		public function setQuadTreeNode():void{
 			quadTreeNode = QuadTree.setNode(this);
 			//trace("node",node);
@@ -174,22 +186,6 @@
 		//needs to have quadtree class updated so it works right
 		public function getQuadTreeNode():int{
 			return quadTreeNode;
-		}
-		
-		public function addActorToGameEngine():void{
-			utilities.Engine.Game.gameContainer.addChild(this);
-		}
-		
-		public function removeActorFromGameEngine(actor:MovieClip,array:Array):void{
-			actor.availableForTargeting=false;
-			var index:int = array.indexOf(actor);
-			array.splice(index,1);
-			utilities.Engine.Game.gameContainer.removeChild(actor);
-			actor.setTargetToFalse();
-		}
-		
-		public function testFunction():void{
-			trace(this,"class exists, probably means you fucked up somewhere else, or you can't access the object you want inside the class.")
 		}
 		
 		public function get_availableForTargeting():Boolean{
@@ -201,9 +197,8 @@
 		}
 		
 		public function setTarget(newTarget:MovieClip):void{
-			//trace("Bullet: setTarget");
 			if(target == newTarget){
-				trace("the old and new targets werer the same: what happened?");
+				trace("Actot: the old and new targets werer the same: what happened?");
 			}
 			target = newTarget;
 			setTargetToTrue();
@@ -221,6 +216,8 @@
 			return hasTarget;
 		}
 		
+		//if this actor is tracking a target
+		//force it to no longer track that target
 		public function setTargetToFalse():void{
 			hasTarget = false;
 			target = null;
@@ -228,5 +225,23 @@
 		public function setTargetToTrue():void{
 			hasTarget = true;
 		}
+		
+		//creation & destruction
+		public function addActorToGameEngine():void{
+			utilities.Engine.Game.gameContainer.addChild(this);
+		}
+		
+		public function removeActorFromGameEngine(actor:MovieClip,array:Array):void{
+			actor.availableForTargeting=false;
+			var index:int = array.indexOf(actor);
+			array.splice(index,1);
+			utilities.Engine.Game.gameContainer.removeChild(actor);
+			actor.setTargetToFalse();
+		}
+		
+		public function testFunction():void{
+			trace(this,"Actor: class exists, probably means you fucked up somewhere else, or you can't access the object you want inside the class.")
+		}
+		
 	}
 }

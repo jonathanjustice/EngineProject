@@ -4,6 +4,7 @@
 	import utilities.Engine.Game;
 	import utilities.Actors.Actor;
 	import utilities.Input.KeyInputManager;
+	import  utilities.Input.MouseInputManager;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -49,8 +50,19 @@
 			//getRotationFromKeyInputManager();
 			//apply the velocities to the avatar
 			applyVelocities();
+			var myPoint:Point = new Point(mouseX,mouseY);
+			myPoint = Main.getMouseCoordinates();
+			//myPoint = utilities.Mathematics.MathFormulas.convertLocalPositionToGlobal(myPoint);
+			//Point_Actor_At_Target(target:Point)
+			Point_Actor_At_Target(myPoint);
+			
+			//trace("thisX: ",this.x,"thisY:",this.y);
 		}
 		
+		/*public override function Point_Actor_At_Target(target:Point):void{
+			MathFormulas.Point_Object_At_Target(this,target);
+		}
+		*/
 		public function getAnglesFromKeyInputManager():void{
 			this.rotation = Main.keyInputManager.getMyAngle();
 		}

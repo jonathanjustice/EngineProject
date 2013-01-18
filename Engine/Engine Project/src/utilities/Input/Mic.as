@@ -1,4 +1,4 @@
-﻿package utilities{
+﻿package utilities.Input{
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.media.Microphone;

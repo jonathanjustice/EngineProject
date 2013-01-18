@@ -10,7 +10,10 @@
 		
 		
 		// this is the only way to set volume for sounds
-		//private var drainTransform:SoundTransform = new SoundTransform(0.1);	
+		//private var soundTransform:SoundTransform = new SoundTransform(0.1);	
+		private var soundTransfroms:Array = new Array;
+		private var soundEffectsChannels:Array = new Array;
+		private var musicChannels:Array = new Array;
 		private var musicChannel:SoundChannel = new SoundChannel;
 		private var sxfChannel_01:SoundChannel = new SoundChannel;
 		private var musicSound:Sound = new Sound(new URLRequest("GuileTheme.mp3"));
@@ -19,6 +22,11 @@
 		public function SoundPlayer():void{
 			
 			//requestSounds();
+		}
+		
+		public function createSoundChannel():void {
+			var soundChannel:SoundChannel = new SoundChannel();
+			soundChannels.push(soundChannel);
 		}
 		
 		public function setUpSounds():void{
@@ -38,8 +46,16 @@
 			musicChannel.soundTransform = myTransform;
 		}
 		
-		public function stopAllSoundChannels():void{
-			sxfChannel_01.stop();
+		public function stopAllMusicChannels():void{
+			for (each var soundChannel:SoundChannel in musicChannels) {
+				soundChannel.stop();				
+			}
+		}
+		
+		public function stopAllSoundEffectsChannels():void{
+			for (each var soundChannel:SoundChannel in soundEffectsChannels) {
+				soundChannel.stop();				
+			}
 		}
 	}
 }

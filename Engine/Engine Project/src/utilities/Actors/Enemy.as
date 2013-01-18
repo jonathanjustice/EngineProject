@@ -42,16 +42,6 @@
 			this.y += yVelocity;
 		}
 		
-		
-		
-
-		private function checkForDamage():void{
-			if(health <= 0){
-				markDeathFlag();
-			}
-		}
-		
-		
 		//direction indicator is useful for determine what direction the enemy is faceing / moving in / shooting in
 		//make it invisible if its not being used
 		//it's commented out because it't not part of the default graphic anymore
@@ -65,11 +55,11 @@
          	spawnTime = getTimer();
 			//trace("spawnTime",spawnTime);
         }
-		
+		/*
 		public function takeDamage(amount:int):void{
 			health -= amount;
 		}
-		
+		*/
 		public function markKillWithXpFlag():void{
 			markDeathFlag();
 			applyXP = true;

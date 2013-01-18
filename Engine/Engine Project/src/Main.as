@@ -6,6 +6,7 @@
 	import utilities.Engine.Game;
 	import utilities.Engine.UIManager;
 	import utilities.Input.KeyInputManager;
+	import utilities.Input.MouseInputManager;
 	import flash.geom.Point;
 
 	public class Main extends MovieClip{
@@ -15,6 +16,7 @@
 		public static var uiContainer:MovieClip;//empty MC?
 		public static var uiManager:Object;//empty MC?
 		public static var keyInputManager:Object;
+		public static var mouseInputManager:Object;
 
 		//check to see if the stage exists
 		//usually only necessary if this is on the web or deployed inside another swf
@@ -22,6 +24,7 @@
 			if (stage) init();
             else addEventListener(Event.ADDED_TO_STAGE, init);
 			trace(stage);
+			trace(mouseX);
 		}
 		
 		//once the stage exists, launch the game
@@ -50,6 +53,7 @@
 		private function createKeyInputManager():void{
 			//trace("the input manager exists")
 			keyInputManager = new utilities.Input.KeyInputManager();
+			mouseInputManager = new utilities.Input.MouseInputManager();
 		}
 		
 		private static function createUIManager():void{
@@ -68,6 +72,13 @@
 		//useful when you click on buttons or click outside the game
 		public static function returnFocusToGampelay():void{
 			theStage.focus = null;
+		}
+		
+		public static function getMouseCoordinates():Point{
+			var mousePoint:Point = new Point(theStage.mouseX,theStage.mouseY);
+			//var mousePoint
+			//trace("mousePoint:",mousePoint);
+			return mousePoint;
 		}
 	}
 }
