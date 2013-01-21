@@ -3,7 +3,7 @@
 	import flash.display.MovieClip;
 	import flash.events.*;
 	import utilities.Actors.LootDrops.LootDrop;
-	public class TreasureChest extends utilities.Actors.LootDrops.LootDrop{
+	public class TreasureChest extends utilities.Actors.Actor{
 		private var isOpen:Boolean=false;
 		private var isBeingOpened:Boolean=false;
 		private var openProgress:int=0;
@@ -54,7 +54,7 @@
 		}
 		
 		public function addChestGraphic(type:String):void{
-			trace("new chest");
+			//trace("new chest");
 			chestType = type;
 			if(chestType == "Basic"){
 				//chestGraphic = new Chest_Basic();

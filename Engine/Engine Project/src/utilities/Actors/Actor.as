@@ -9,6 +9,7 @@
 	import utilities.Engine.Builders.LootManager;
 	import utilities.Actors.Stats.WeaponStats;
 	import utilities.GraphicsElements.GraphicsElement;
+	import utilities.GraphicsElements.Animation;
 	import utilities.Mathematics.MathFormulas;
 	import utilities.Mathematics.QuadTree;
 	import flash.geom.Point;
@@ -242,6 +243,5 @@
 		public function testFunction():void{
 			trace(this,"Actor: class exists, probably means you fucked up somewhere else, or you can't access the object you want inside the class.")
 		}
-		
 	}
 }

@@ -12,6 +12,10 @@
 			
 		}
 		
+		public function updateLoop():void{
+			
+		}
+		
 		public static function setAmount(amt:int):void{
 			trace("set amount");
 			//trace("amount",lootAmount);

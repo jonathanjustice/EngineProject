@@ -24,6 +24,8 @@
 		private static var quadTree:QuadTree;
 		private static var gamePaused:Boolean=true;
 		
+		//public var player:Player;
+		public var hero:MovieClip;
 		//Not adding objects directly to stage so that I can manipulate the world globally when needed
 		//usually for things like zooming in and out, recentering the camera, etc.
 		public static var gameContainer:MovieClip;
@@ -33,6 +35,15 @@
 			createGameContainer();
 			createQuadTree();
 			//startGame("debug");
+			createHero();
+		}
+		
+		public function createHero():void{
+			hero = new MovieClip();
+			var mc:MovieClip = Main.getClassFromSWF("assets","hero");
+			
+			//hero.setPosition(new Point(3*gridSize,3*gridSize));
+			gameContainer.addChild(hero);
 		}
 		
 		private static function createGameContainer():void{

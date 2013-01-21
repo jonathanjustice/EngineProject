@@ -8,8 +8,22 @@
 	import utilities.Input.KeyInputManager;
 	import utilities.Input.MouseInputManager;
 	import flash.geom.Point;
+	import flash.display.BitmapData;
+	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.KeyboardEvent;
+	import flash.system.ApplicationDomain;
+	
+	/*bulk loader*/
+	import br.com.stimuli.loading.BulkLoader;
+	import br.com.stimuli.loading.BulkProgressEvent;
+	import br.com.stimuli.loading.lazyloaders.LazyXMLLoader;
 
 	public class Main extends MovieClip{
+	public var loader:LazyXMLLoader;
+	public var _loadingSWF:DisplayObject;
 		
 		public static var theStage:Object;
 		public static var game:Object;
@@ -23,25 +37,28 @@
 		public function Main():void {
 			if (stage) init();
             else addEventListener(Event.ADDED_TO_STAGE, init);
-			trace(stage);
-			trace(mouseX);
 		}
 		
 		//once the stage exists, launch the game
         private function init(e:Event = null):void {
             removeEventListener(Event.ADDED_TO_STAGE, init);
+			loader = new LazyXMLLoader("assets/assets.xml","assets",5);
+			loader.addEventListener(BulkProgressEvent.COMPLETE,doneLoading);
+			loader.start();
 			initialSetup();
+			
         }
 		
 		//define the stage for use in other classes
 		//launch the engine
 		//set up a some important managers
 		private function initialSetup():void{
+			stage.stageFocusRect = false;
 			defineTheStage();
 			createKeyInputManager();
 			createUIManager();
 			createTheGameEngine();
-			openStartScreen();
+			//openStartScreen();
 		}
 		
 		//make sure to get rid of this eventually
@@ -76,9 +93,49 @@
 		
 		public static function getMouseCoordinates():Point{
 			var mousePoint:Point = new Point(theStage.mouseX,theStage.mouseY);
-			//var mousePoint
-			//trace("mousePoint:",mousePoint);
 			return mousePoint;
+		}
+		
+		private function doneLoading(e:Event):void{
+			loadUI();
+			tileLoad();
+			openStartScreen();
+			//stage.addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown);
+			//stage.addEventListener(KeyboardEvent.KEY_UP,onKeyUp);
+			//tracker.trackPageview( "/game/loaded" );
+		}
+		
+		public static function getClassFromSWF(assetID:String,classID:String,loaderID:String="assets"):MovieClip{
+			var bulkLoader:BulkLoader = BulkLoader.getLoader(loaderID);
+			var swfLoader:MovieClip = bulkLoader.getMovieClip(assetID);
+			//trace(swfLoader);
+			var swf:ApplicationDomain = swfLoader.loaderInfo.applicationDomain;
+			var view:MovieClip = MovieClip(new (swfLoader.getDefinition(classID) as Class)() as MovieClip);
+			return view;
+		}
+		
+		public function getBitmapDataFromSWF(assetID:String,classID:String,loaderID:String="assets"):BitmapData{
+			var bulkLoader:BulkLoader = BulkLoader.getLoader(loaderID);
+			var swfLoader:MovieClip= bulkLoader.getMovieClip(assetID);
+			var swf:ApplicationDomain = swfLoader.loaderInfo.applicationDomain;
+			var view:BitmapData = BitmapData(new (swf.getDefinition(classID) as Class)() as BitmapData);
+			return view;
+		}
+		
+		public function getXMLFrom(assetID:String,loaderID:String="assets"):XML{
+			var bulkLoader:BulkLoader = BulkLoader.getLoader(loaderID);
+			return bulkLoader.getXML(assetID).copy();
+		}
+		
+		private function loadUI():void{
+			/*			winingScreen = getClassFromSWF("win","view");
+			hud = getClassFromSWF("hud","view");
+			losingScreen =  getClassFromSWF("test","view");*/
+		}
+		
+		private function tileLoad():void{
+			//airTile = getBitmapDataFromSWF("assets","airTile");
+			//grassTile = getBitmapDataFromSWF("assets","dirtTile");
 		}
 	}
 }

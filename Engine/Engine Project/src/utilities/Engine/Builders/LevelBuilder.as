@@ -1,17 +1,16 @@
 ﻿package utilities.Engine.Builders{
+	import utilities.Actors.Actor;
+	import utilities.Engine.Game;
+	import flash.display.MovieClip;
 	public class LevelBuilder{
 		public function LevelBuilder(){
 			setUp();
 		}
 		
 		public function setUp():void{
-			BuildLevel();
+			//BuildLevel();
 		}
 		
-		public function BuildLevel():void{
-			//Main.lootManager.createNewTreasureChest(500,500);
-			//var level:MovieClip;
-			//Main.gameContainer.addChild(level);
-		}
+		
 	}
 }

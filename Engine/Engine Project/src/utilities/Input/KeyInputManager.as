@@ -31,7 +31,7 @@
 		}
 		
 		public function setUp():void{
-			trace("keyinputmanager setup")
+			//trace("keyinputmanager setup");
 			myAngle = 0;
 			Main.theStage.addEventListener(KeyboardEvent.KEY_UP, keyUpHandler);
 			Main.theStage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);

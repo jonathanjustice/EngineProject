@@ -3,8 +3,10 @@
 	import utilities.Engine.DefaultManager;
 	import utilities.Actors.GameBoardPieces.Level;
 	import utilities.Actors.GameBoardPieces.Wall;
+	import utilities.Actors.GameBoardPieces.Terrain;
 	import flash.geom.Point;
 	public class LevelManager extends utilities.Engine.DefaultManager{
+		private var tempArray:Array = new Array();
 		public static var level:MovieClip;
 		public static var levels:Array;
 		public function LevelManager(){
@@ -27,7 +29,7 @@
 				wall.x=theX;
 				wall.y=theY;
 				levels.push(wall);
-				wall.setPreviousPosition();
+				//wall.setPreviousPosition();
 			}
 		}
 		

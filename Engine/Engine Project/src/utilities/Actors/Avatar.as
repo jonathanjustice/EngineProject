@@ -24,8 +24,6 @@
 		
 		
 		public function Avatar(){
-			//don't do stuff
-			trace("avatar");
 			setUp();
 		}
 		
@@ -52,9 +50,7 @@
 			applyVelocities();
 			var myPoint:Point = new Point(mouseX,mouseY);
 			myPoint = Main.getMouseCoordinates();
-			//myPoint = utilities.Mathematics.MathFormulas.convertLocalPositionToGlobal(myPoint);
-			//Point_Actor_At_Target(target:Point)
-			Point_Actor_At_Target(myPoint);
+			//Point_Actor_At_Target(myPoint);
 			
 			//trace("thisX: ",this.x,"thisY:",this.y);
 		}

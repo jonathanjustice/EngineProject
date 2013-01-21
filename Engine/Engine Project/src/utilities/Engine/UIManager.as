@@ -31,7 +31,7 @@
 		
 		public function openStartScreen():void{
 			screenStart = new ScreenStart();
-			trace("start");
+			//trace("start");
 		}
 		
 		/*

@@ -11,6 +11,7 @@
 			defineGraphics2();
 			addActorToGameEngine();
 			setPreviousPosition();
+			//trace("Wall:Setup");
 		}
 		
 		public function updateLoop():void{
