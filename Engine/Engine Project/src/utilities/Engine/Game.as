@@ -8,6 +8,7 @@
 	import utilities.Engine.Combat.BulletManager;
 	import utilities.Engine.Combat.EnemyManager;
 	import utilities.Engine.Combat.AvatarManager;
+	import utilities.Audio.SoundManager;
 	import utilities.Actors.Avatar;
 	import utilities.Mathematics.QuadTree;
 	
@@ -112,6 +113,7 @@
 			createEnemyManager();
 			createCombatManager();
 			createLootManager();
+			createSoundManager();
 		}
 		
 		private static function createLevelManager():void{
@@ -140,6 +142,11 @@
 		
 		private static function createLootManager():void{
 			lootManager = new LootManager();
+		}
+		
+		private static function createSoundManager():void {
+			terace("Game: createSoundManager");
+			soundManager = new SoundManager();
 		}
 		
 		
