@@ -21,6 +21,7 @@
 		public static var lootManager:LootManager;
 		public static var levelBuilder:LevelBuilder;
 		public static var levelManager:LevelManager;
+		public static var soundManager:SoundManager;
 		public static var avatar:Avatar;
 		private static var quadTree:QuadTree;
 		private static var gamePaused:Boolean=true;
@@ -36,16 +37,16 @@
 			createGameContainer();
 			createQuadTree();
 			//startGame("debug");
-			createHero();
+		//	createHero();
 		}
 		
-		public function createHero():void{
+		/*public function createHero():void{
 			hero = new MovieClip();
 			var mc:MovieClip = Main.getClassFromSWF("assets","hero");
 			
 			//hero.setPosition(new Point(3*gridSize,3*gridSize));
 			gameContainer.addChild(hero);
-		}
+		}*/
 		
 		private static function createGameContainer():void{
 			gameContainer = new utilities.Screens.GameContainer();
@@ -145,7 +146,7 @@
 		}
 		
 		private static function createSoundManager():void {
-			terace("Game: createSoundManager");
+			trace("Game: createSoundManager");
 			soundManager = new SoundManager();
 		}
 		

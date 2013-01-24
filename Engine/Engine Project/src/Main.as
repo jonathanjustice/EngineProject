@@ -42,9 +42,9 @@
 		//once the stage exists, launch the game
         private function init(e:Event = null):void {
             removeEventListener(Event.ADDED_TO_STAGE, init);
-			loader = new LazyXMLLoader("assets/assets.xml","assets",5);
+			//loader = new LazyXMLLoader("assets/assets.xml","assets",5);
 			//loader.addEventListener(BulkProgressEvent.COMPLETE,doneLoading);
-			loader.start();
+			//loader.start();
 			initialSetup();
 			
         }
@@ -58,7 +58,7 @@
 			createKeyInputManager();
 			createUIManager();
 			createTheGameEngine();
-			//openStartScreen();
+			openStartScreen();
 		}
 		
 		//make sure to get rid of this eventually
@@ -97,15 +97,15 @@
 		}
 		
 		private function doneLoading(e:Event):void{
-			loadUI();
-			tileLoad();
+			//loadUI();
+			//tileLoad();
 			openStartScreen();
 			//stage.addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown);
 			//stage.addEventListener(KeyboardEvent.KEY_UP,onKeyUp);
 			//tracker.trackPageview( "/game/loaded" );
 		}
 		
-		public static function getClassFromSWF(assetID:String,classID:String,loaderID:String="assets"):MovieClip{
+		/*public static function getClassFromSWF(assetID:String,classID:String,loaderID:String="assets"):MovieClip{
 			var bulkLoader:BulkLoader = BulkLoader.getLoader(loaderID);
 			var swfLoader:MovieClip = bulkLoader.getMovieClip(assetID);
 			//trace(swfLoader);
@@ -128,14 +128,15 @@
 		}
 		
 		private function loadUI():void{
-			/*			winingScreen = getClassFromSWF("win","view");
-			hud = getClassFromSWF("hud","view");
-			losingScreen =  getClassFromSWF("test","view");*/
+			//winingScreen = getClassFromSWF("win","view");
+			//hud = getClassFromSWF("hud","view");
+			//losingScreen =  getClassFromSWF("test","view");
 		}
 		
 		private function tileLoad():void{
 			//airTile = getBitmapDataFromSWF("assets","airTile");
 			//grassTile = getBitmapDataFromSWF("assets","dirtTile");
 		}
+		*/
 	}
 }
