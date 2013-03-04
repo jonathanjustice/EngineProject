@@ -42,7 +42,7 @@ package utilities.Saving_And_Loading{//from livedocs
 						break;
 				}
 			}
-		    trace("loaded value: " + sharedObject.data.savedValue + "\n\n");
+		  //  trace("loaded value: " + sharedObject.data.savedValue + "\n\n");
         }
         
         public function clearValue():void {
@@ -54,10 +54,10 @@ package utilities.Saving_And_Loading{//from livedocs
            trace("User closed permission dialog...\n");
             switch (event.info.code) {
                 case "SharedObject.Flush.Success":
-                   trace("User granted permission -- value saved.\n");
+                  // trace("User granted permission -- value saved.\n");
                     break;
                 case "SharedObject.Flush.Failed":
-                    trace("User denied permission -- value not saved.\n");
+                   // trace("User denied permission -- value not saved.\n");
                     break;
             }
 			//trace("\n");
