@@ -26,7 +26,9 @@
 				trace("its a bitmapData");
 					var newBitmap:Bitmap = new Bitmap();
 					newBitmap.bitmapData = savedData as BitmapData;
+					newBitmap.z = 3000;
 					utilities.Engine.Game.gameContainer.addChild(newBitmap);
+					utilities.Engine.Game.gameContainer.addChildAt(newBitmap,0);
 					trace("newBitmap:",newBitmap);
 			}
 		}
