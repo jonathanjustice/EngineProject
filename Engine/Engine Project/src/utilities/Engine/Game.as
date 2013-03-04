@@ -217,5 +217,9 @@
 			var gameContainerPoint:Point = new Point(gameContainer.x,gameContainer.y);
 			return gameContainerPoint;
 		}
+		
+		public static function deselectAllActors():void{
+			avatarManager.deselectActors();
+		}
 	}
 }

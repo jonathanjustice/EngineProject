@@ -31,8 +31,24 @@
 			worldOffSet = Game.getGameContainerCoordinates();
 			Main.theStage.addEventListener(Event.ENTER_FRAME, isDraggingWorld);
 			Main.theStage.addEventListener(MouseEvent.MOUSE_UP, stopDragWorld);
-			
+			utilities.Engine.Game.gameContainer.addEventListener(MouseEvent.CLICK, clickedStage);
 		}
+		
+		private function clickedStage(event:MouseEvent):void {
+			/*if (selected) {
+				selected = false;
+				removeStroke();
+			}else {
+				selected = true;
+				addStroke();
+			}*/
+			//Game.deselectAllActors();
+		}
+		/*
+		private function deselectActor():void {
+			selected = false;
+		}
+		*/
 		
 		//drag the game container with the mouse
 		//when you stop dragging it, it eases to a stop

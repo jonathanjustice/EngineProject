@@ -11,7 +11,7 @@
 	import flash.display.Sprite;
 	import flash.text.*;
 
-	public class Avatar extends utilities.Actors.Actor{
+	public class Avatar extends SelectableActor{
 		//private var mySprite:Sprite = new Sprite();
 		private var myTextField:TextField = new TextField(); 
 		private var myAngle:Number=0;
@@ -25,6 +25,7 @@
 		
 		public function Avatar(){
 			setUp();
+			//addStroke();
 		}
 		
 		public function setUp():void{
