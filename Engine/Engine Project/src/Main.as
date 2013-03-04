@@ -55,10 +55,10 @@
 		private function initialSetup():void{
 			stage.stageFocusRect = false;
 			defineTheStage();
-			createKeyInputManager();
 			createUIManager();
 			createTheGameEngine();
 			openStartScreen();
+			createKeyInputManager();
 		}
 		
 		//make sure to get rid of this eventually
@@ -71,6 +71,7 @@
 			//trace("the input manager exists")
 			keyInputManager = new utilities.Input.KeyInputManager();
 			mouseInputManager = new utilities.Input.MouseInputManager();
+			
 		}
 		
 		private static function createUIManager():void{

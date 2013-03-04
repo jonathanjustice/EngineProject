@@ -1,6 +1,7 @@
 ﻿package utilities.Engine{
 	import flash.events.Event;
 	import flash.display.MovieClip;
+	import flash.geom.Point;
 	import utilities.Screens.GameContainer;
 	import utilities.Engine.Builders.LevelBuilder;
 	import utilities.Engine.Builders.LootManager;
@@ -210,6 +211,11 @@
 		
 		public static function getGameContainer():MovieClip{
 			return gameContainer;
+		}
+		
+		public static function getGameContainerCoordinates():Point{
+			var gameContainerPoint:Point = new Point(gameContainer.x,gameContainer.y);
+			return gameContainerPoint;
 		}
 	}
 }
