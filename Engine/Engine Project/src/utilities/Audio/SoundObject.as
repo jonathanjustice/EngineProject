@@ -24,7 +24,7 @@
 		
 		private function loadSsound($evt:Event):void{
 			soundFile.removeEventListener(Event.COMPLETE, loadSsound);
-			playSound(999, .25);
+			//playSound(999, .25);
       	}
 		
 		public function playSound(number_of_times_to_play:int,newVolume:Number):void{

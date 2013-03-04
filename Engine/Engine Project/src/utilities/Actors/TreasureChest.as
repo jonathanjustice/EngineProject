@@ -56,23 +56,23 @@
 		public function addChestGraphic(type:String):void{
 			//trace("new chest");
 			chestType = type;
-			if(chestType == "Basic"){
+		/*	if(chestType == "Basic"){
 				//chestGraphic = new Chest_Basic();
 				this.addChild(chestGraphic);
 				createProgressBar("Basic");
 				setProgressBarVisibility(false);
-			}
+			}*/
 		}
 		
 		//display states of chest, open, not open, being opened
 		public function updateDisplayState():void{
-			if(isOpen){
+		/*	if(isOpen){
 				chestGraphic.gotoAndStop("open");
 			}else if(!isOpen){
 				chestGraphic.gotoAndStop("closed");
 			}else if(isBeingOpened){
 				//chestGraphic.gotoAndStop("opening");
-			}
+			}*/
 		}
 	}
 }

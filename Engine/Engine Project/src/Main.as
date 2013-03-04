@@ -105,38 +105,5 @@
 			//tracker.trackPageview( "/game/loaded" );
 		}
 		
-		/*public static function getClassFromSWF(assetID:String,classID:String,loaderID:String="assets"):MovieClip{
-			var bulkLoader:BulkLoader = BulkLoader.getLoader(loaderID);
-			var swfLoader:MovieClip = bulkLoader.getMovieClip(assetID);
-			//trace(swfLoader);
-			var swf:ApplicationDomain = swfLoader.loaderInfo.applicationDomain;
-			var view:MovieClip = MovieClip(new (swfLoader.getDefinition(classID) as Class)() as MovieClip);
-			return view;
-		}
-		
-		public function getBitmapDataFromSWF(assetID:String,classID:String,loaderID:String="assets"):BitmapData{
-			var bulkLoader:BulkLoader = BulkLoader.getLoader(loaderID);
-			var swfLoader:MovieClip= bulkLoader.getMovieClip(assetID);
-			var swf:ApplicationDomain = swfLoader.loaderInfo.applicationDomain;
-			var view:BitmapData = BitmapData(new (swf.getDefinition(classID) as Class)() as BitmapData);
-			return view;
-		}
-		
-		public function getXMLFrom(assetID:String,loaderID:String="assets"):XML{
-			var bulkLoader:BulkLoader = BulkLoader.getLoader(loaderID);
-			return bulkLoader.getXML(assetID).copy();
-		}
-		
-		private function loadUI():void{
-			//winingScreen = getClassFromSWF("win","view");
-			//hud = getClassFromSWF("hud","view");
-			//losingScreen =  getClassFromSWF("test","view");
-		}
-		
-		private function tileLoad():void{
-			//airTile = getBitmapDataFromSWF("assets","airTile");
-			//grassTile = getBitmapDataFromSWF("assets","dirtTile");
-		}
-		*/
 	}
 }

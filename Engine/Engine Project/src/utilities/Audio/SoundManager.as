@@ -13,7 +13,7 @@
 		private var filePath:String = "GuileTheme.mp3";
 		
 		public function SoundManager():void{
-			createNewSoundObject(filePath);
+			//createNewSoundObject(filePath);
 			//stop_a_sound_channel(filePath);
 		}
 		

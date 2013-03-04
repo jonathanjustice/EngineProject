@@ -8,6 +8,7 @@
 	import utilities.Engine.Combat.BulletManager;
 	import utilities.Engine.Combat.EnemyManager;
 	import utilities.Engine.Combat.AvatarManager;
+	import utilities.Engine.Combat.SaveDataManager;
 	import utilities.Audio.SoundManager;
 	import utilities.Actors.Avatar;
 	import utilities.Mathematics.QuadTree;
@@ -22,6 +23,7 @@
 		public static var levelBuilder:LevelBuilder;
 		public static var levelManager:LevelManager;
 		public static var soundManager:SoundManager;
+		public static var saveDataManager:SaveDataManager;
 		public static var avatar:Avatar;
 		private static var quadTree:QuadTree;
 		private static var gamePaused:Boolean=true;
@@ -115,6 +117,7 @@
 			createCombatManager();
 			createLootManager();
 			createSoundManager();
+			createSaveDataManager();
 		}
 		
 		private static function createLevelManager():void{
@@ -146,8 +149,11 @@
 		}
 		
 		private static function createSoundManager():void {
-			trace("Game: createSoundManager");
 			soundManager = new SoundManager();
+		}
+		
+		private static function createSaveDataManager():void{
+			saveDataManager = new SaveDataManager();
 		}
 		
 		

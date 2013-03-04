@@ -29,5 +29,15 @@
 			myGraphic.y = -25;
 			this.addChild(myGraphic);
 		}
+		
+		public function drawGraphic3():void{
+			myGraphic.graphics.lineStyle(3,0x0000ff);
+			myGraphic.graphics.beginFill(0x8800FF);
+			myGraphic.graphics.drawRect(0,0,50,50);
+			myGraphic.graphics.endFill();
+			myGraphic.x = -25;
+			myGraphic.y = -25;
+			this.addChild(myGraphic);
+		}
 	}
 }
