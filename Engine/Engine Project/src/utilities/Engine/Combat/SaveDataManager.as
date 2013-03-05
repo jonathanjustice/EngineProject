@@ -10,7 +10,8 @@
 		private var sharedObjects:SharedObjects = new SharedObjects();
 		//private var imageSaver:ImageSaver = new ImageSaver();
 		public function SaveDataManager(){
-			newSaveInstance();
+		//	newSaveInstance();
+		//	getSaveData();
 		}
 		
 		private function newSaveInstance():void {
@@ -18,7 +19,6 @@
 			var bitmap:Bitmap = bitmapDataObject.getAnImageOfTheStage();
 			//var bitmap:Bitmap = new Bitmap(new BitmapData(300,300,false,0xFF0000));
 			sharedObjects.saveObjectToDisk(bitmap.bitmapData);
-			getSaveData();
 		}
 		
 		private function getSaveData():void {

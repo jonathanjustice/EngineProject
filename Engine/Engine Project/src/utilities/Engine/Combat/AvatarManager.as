@@ -32,6 +32,12 @@
 			}
 		}
 		
+		public function deselectSomeActors():void {
+			for each(var myAvatar:Avatar in avatars) {
+				myAvatar.deselectActor();
+			}
+		}
+		
 		public override function updateLoop():void{
 			for each(var myAvatar:Avatar in avatars){
 				myAvatar.updateLoop();

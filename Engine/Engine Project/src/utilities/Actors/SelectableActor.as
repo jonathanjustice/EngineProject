@@ -8,13 +8,15 @@
     import flash.filters.BitmapFilterQuality;
     import flash.filters.GlowFilter;
 	public class SelectableActor extends Actor{
-		private var selected:Boolean = false;
-		public function SelectableActor(){
+		private var isSelected:Boolean = false;
+		public function SelectableActor() {
+			this.mouseChildren = true;
+			this.mouseEnabled = true;
 			this.addEventListener(MouseEvent.CLICK, clickedActor);
 		}
 		
 		private function clickedActor(event:MouseEvent):void {
-			if (selected) {
+			if (isSelected) {
 				deselectActor();
 			}else {
 				selectActor();
@@ -22,14 +24,14 @@
 		}
 		
 		public function deselectActor():void {
-			trace("deselect");
-			selected = false;
+			//trace("deselect");
+			isSelected = false;
 			removeStroke();
 		}
 		
 		public function selectActor():void {
-			trace("select");
-			selected = true;
+			//trace("select");
+			isSelected = true;
 			addStroke();
 		}
 		
@@ -68,5 +70,9 @@
 
             return new GlowFilter(color,alpha,blurX,blurY,strength,quality,inner,knockout);
         }
+		
+		public function getIsSelected():Boolean {
+			return isSelected;
+		}
 	}
 }

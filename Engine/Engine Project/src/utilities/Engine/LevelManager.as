@@ -1,5 +1,6 @@
 ﻿package utilities.Engine{
 	import flash.display.MovieClip;
+	import utilities.Actors.SelectableActor;
 	import utilities.Engine.DefaultManager;
 	import utilities.Actors.GameBoardPieces.Level;
 	import utilities.Actors.GameBoardPieces.Wall;
@@ -48,10 +49,16 @@
 			levels.push(level);
 		}
 		
+		public function deselectActors():void {
+			//trace("levels:", levels);
+			for (var i:int = 1; i < levels.length; i++) {
+				levels[i].deselectActor();
+			}
+		}
+		
 		public override function getArray():Array{
 			return levels;
 		}
-		
 		public function getLevel():Object{
 			return levels[0];
 		}

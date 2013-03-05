@@ -3,10 +3,12 @@
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.geom.Point;
+	import utilities.Actors.SelectableActor;
 	import utilities.Mathematics.MathFormulas;
 	import utilities.Input.KeyCodes;
 	import utilities.Engine.DefaultManager;
 	import utilities.Engine.Game;
+	import utilities.Engine.Combat.AvatarManager;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	public class MouseInputManager extends utilities.Engine.DefaultManager{
@@ -35,15 +37,54 @@
 		}
 		
 		private function clickedStage(event:MouseEvent):void {
-			/*if (selected) {
-				selected = false;
-				removeStroke();
-			}else {
-				selected = true;
-				addStroke();
-			}*/
-			//Game.deselectAllActors();
+			var clickedArray:Array = new Array();
+		/*	
+			if (
+				utilities.Engine.Game.avatarManager.allItemsCollidingWithMouse(utilities.Engine.Game.avatarManager.getArray()).length == 0
+				&&
+				utilities.Engine.Game.levelManager.allItemsCollidingWithMouse(utilities.Engine.Game.levelManager.getArray()).length == 0
+			) {
+				utilities.Engine.Game.avatarManager.deselectActors();
+				utilities.Engine.Game.levelManager.deselectActors();
+			}
+			*/
+			
+			//mouse is not touching any avatars
+			if (utilities.Engine.Game.avatarManager.allItemsCollidingWithMouse(utilities.Engine.Game.avatarManager.getArray()).length == 0) {
+				utilities.Engine.Game.avatarManager.deselectActors();
+				trace("mouse is not touching any avatars");
+			}
+			//mouse is touching more than 1 avatar
+			if (utilities.Engine.Game.avatarManager.allItemsSelected(utilities.Engine.Game.avatarManager.getArray()).length == 1) {
+				var avatarsToDeselect:Array = new Array();
+				avatarsToDeselect = utilities.Engine.Game.avatarManager.allItemsSelected(utilities.Engine.Game.avatarManager.getArray());
+				for each(var actor1:SelectableActor in avatarsToDeselect) {
+					actor1.deselectActor();
+				}
+				trace("mouse is touching more than 1 avatar");
+			}
+			//mouse is not touching any walls
+			if(utilities.Engine.Game.levelManager.allItemsCollidingWithMouse(utilities.Engine.Game.levelManager.getArray()).length == 0) {
+				utilities.Engine.Game.levelManager.deselectActors();
+				trace("mouse is not touching any walls");
+			}
+			//mouse is touching more than 1 wall
+			if (utilities.Engine.Game.levelManager.allItemsSelected(utilities.Engine.Game.levelManager.getArray()).length == 1) {
+				var wallsToDeselect:Array = new Array();
+				wallsToDeselect = utilities.Engine.Game.levelManager.allItemsSelected(utilities.Engine.Game.levelManager.getArray());
+				trace(wallsToDeselect);
+				for each(var actor2:SelectableActor in wallsToDeselect) {
+					actor2.deselectActor();
+				}
+				trace("mouse is touching more than 1 wall");
+			}
+			
+			
+			
 		}
+		
+		
+		
 		/*
 		private function deselectActor():void {
 			selected = false;

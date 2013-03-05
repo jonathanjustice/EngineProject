@@ -2,8 +2,9 @@
 	import flash.display.MovieClip;
 	import flash.geom.Point;
 	import utilities.Actors.Actor;
+	import utilities.Actors.SelectableActor;
 
-	public class Level extends utilities.Actors.Actor{
+	public class Level extends SelectableActor{
 		public function Level(){
 			
 		}
@@ -15,6 +16,18 @@
 		
 		public function updateLoop():void{
 			
+		}
+		
+		public override function deselectActor():void {
+				trace("deselect");
+				
+				//removeStroke();
+		}
+			
+		public override function selectActor():void {
+			trace("select");
+			
+			//addStroke();
 		}
 	}
 }

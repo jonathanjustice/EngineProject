@@ -1,5 +1,8 @@
 ﻿package utilities.Engine{
 	import flash.display.MovieClip;
+	import utilities.Actors.Actor;
+	import flash.geom.Point;
+	import utilities.Actors.SelectableActor;
 	public class DefaultManager extends MovieClip{
 		
 		public function DefaultManager(){
@@ -28,6 +31,44 @@
 		public function getArrayLength():int{
 			var array:Array = new Array(); 
 			return array.length-1;
+		}
+		
+		public function deslectAll():void {
+			
+		}
+		
+		public function allItemsCollidingWithMouse(array:Array):Array {
+			var colldingWithMouse:Array = new Array();
+			var mousePoint:Point = new Point();
+				mousePoint = Main.getMouseCoordinates();
+			for each(var actor:SelectableActor in array) {
+				
+				if (actor.hitTestPoint(mousePoint.x,mousePoint.y)) {
+					colldingWithMouse.push(actor);
+				}
+				/*if (actor.getIsSelected() == true) {
+					colldingWithMouse.push(actor);
+				}*/
+			}
+			//trace("colldingWithMouse",colldingWithMouse);
+			return colldingWithMouse;
+		}
+		
+		public function allItemsSelected(array:Array):Array {
+			var selectedItems:Array = new Array();
+			var mousePoint:Point = new Point();
+				mousePoint = Main.getMouseCoordinates();
+			for each(var actor:SelectableActor in array) {
+				if (actor.getIsSelected() == true) {
+					if (actor.hitTestPoint(mousePoint.x,mousePoint.y)) {
+						//don't unselect it
+					}else {
+						selectedItems.push(actor);
+					}
+				}
+			}
+			//trace("selectedItems",selectedItems);
+			return selectedItems;
 		}
 	}
 }
