@@ -4,7 +4,8 @@
 	import flash.geom.Point;
 	import utilities.Actors.SelectableActor;
 	public class DefaultManager extends MovieClip{
-		
+		private var newSelectedItems:Array = new Array();
+
 		public function DefaultManager(){
 			
 		}
@@ -37,7 +38,8 @@
 			
 		}
 		
-		public function allItemsCollidingWithMouse(array:Array):Array {
+		//gives you all the items that touch the mouse
+		public function all_items_colliding_with_mouse(array:Array):Array {
 			var colldingWithMouse:Array = new Array();
 			var mousePoint:Point = new Point();
 				mousePoint = Main.getMouseCoordinates();
@@ -46,29 +48,33 @@
 				if (actor.hitTestPoint(mousePoint.x,mousePoint.y)) {
 					colldingWithMouse.push(actor);
 				}
-				/*if (actor.getIsSelected() == true) {
-					colldingWithMouse.push(actor);
-				}*/
 			}
-			//trace("colldingWithMouse",colldingWithMouse);
 			return colldingWithMouse;
 		}
 		
-		public function allItemsSelected(array:Array):Array {
-			var selectedItems:Array = new Array();
-			var mousePoint:Point = new Point();
+		//gives you all the selected items except the one the mouse 
+		//is colliding with and is on the top of the z order
+		public function all_items_selected_except_the_one_that_was_just_clicked(array:Array):Array {
+			newSelectedItems = [];
+			var oldSelectedItems:Array = new Array();
+			var mousePoint:Point = Main.getMouseCoordinates();
 				mousePoint = Main.getMouseCoordinates();
 			for each(var actor:SelectableActor in array) {
 				if (actor.getIsSelected() == true) {
 					if (actor.hitTestPoint(mousePoint.x,mousePoint.y)) {
 						//don't unselect it
+						newSelectedItems.push(actor);
 					}else {
-						selectedItems.push(actor);
+						oldSelectedItems.push(actor);
 					}
 				}
 			}
-			//trace("selectedItems",selectedItems);
-			return selectedItems;
+			return oldSelectedItems;
+		}
+		
+		//get all the selected actors
+		public function getNewSelectedItems():Array {
+			return newSelectedItems;
 		}
 	}
 }

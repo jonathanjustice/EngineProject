@@ -1,5 +1,7 @@
 ﻿package utilities.Input{
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.geom.Point;
@@ -19,6 +21,8 @@
 		private var delta:Point = new Point;
 		private var oldMouse:Point = new Point;
 		private var maximumEase:Number = 30;
+		private var lastClickedActors:Array = new Array();
+		private var lastClickedCoordinates:Point = new Point;
 		public function MouseInputManager():void{
 			setUp();
 		}
@@ -36,60 +40,40 @@
 			utilities.Engine.Game.gameContainer.addEventListener(MouseEvent.CLICK, clickedStage);
 		}
 		
+		//determine what to select and unselect	by:
+		//get an array of each of the types objects that the mouse is touching,
+		//take action based on the number of actors being touched	
 		private function clickedStage(event:MouseEvent):void {
-			var clickedArray:Array = new Array();
-		/*	
-			if (
-				utilities.Engine.Game.avatarManager.allItemsCollidingWithMouse(utilities.Engine.Game.avatarManager.getArray()).length == 0
-				&&
-				utilities.Engine.Game.levelManager.allItemsCollidingWithMouse(utilities.Engine.Game.levelManager.getArray()).length == 0
-			) {
-				utilities.Engine.Game.avatarManager.deselectActors();
-				utilities.Engine.Game.levelManager.deselectActors();
-			}
-			*/
 			
 			//mouse is not touching any avatars
-			if (utilities.Engine.Game.avatarManager.allItemsCollidingWithMouse(utilities.Engine.Game.avatarManager.getArray()).length == 0) {
+			if (utilities.Engine.Game.avatarManager.all_items_colliding_with_mouse(utilities.Engine.Game.avatarManager.getArray()).length == 0) {
 				utilities.Engine.Game.avatarManager.deselectActors();
-				trace("mouse is not touching any avatars");
 			}
 			//mouse is touching more than 1 avatar
-			if (utilities.Engine.Game.avatarManager.allItemsSelected(utilities.Engine.Game.avatarManager.getArray()).length == 1) {
+			if (utilities.Engine.Game.avatarManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.avatarManager.getArray()).length == 1) {
 				var avatarsToDeselect:Array = new Array();
-				avatarsToDeselect = utilities.Engine.Game.avatarManager.allItemsSelected(utilities.Engine.Game.avatarManager.getArray());
+				avatarsToDeselect = utilities.Engine.Game.avatarManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.avatarManager.getArray());
 				for each(var actor1:SelectableActor in avatarsToDeselect) {
 					actor1.deselectActor();
 				}
-				trace("mouse is touching more than 1 avatar");
 			}
 			//mouse is not touching any walls
-			if(utilities.Engine.Game.levelManager.allItemsCollidingWithMouse(utilities.Engine.Game.levelManager.getArray()).length == 0) {
+			if(utilities.Engine.Game.levelManager.all_items_colliding_with_mouse(utilities.Engine.Game.levelManager.getArray()).length == 0) {
 				utilities.Engine.Game.levelManager.deselectActors();
-				trace("mouse is not touching any walls");
 			}
 			//mouse is touching more than 1 wall
-			if (utilities.Engine.Game.levelManager.allItemsSelected(utilities.Engine.Game.levelManager.getArray()).length == 1) {
+			if (utilities.Engine.Game.levelManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.levelManager.getArray()).length == 1) {
 				var wallsToDeselect:Array = new Array();
-				wallsToDeselect = utilities.Engine.Game.levelManager.allItemsSelected(utilities.Engine.Game.levelManager.getArray());
+				wallsToDeselect = utilities.Engine.Game.levelManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.levelManager.getArray());
 				trace(wallsToDeselect);
 				for each(var actor2:SelectableActor in wallsToDeselect) {
 					actor2.deselectActor();
 				}
-				trace("mouse is touching more than 1 wall");
 			}
-			
-			
-			
+			lastClickedActors.push(event.target);
+			lastClickedCoordinates = Main.getMouseCoordinates();
+			trace("lastClickedCoordinates",lastClickedCoordinates);
 		}
-		
-		
-		
-		/*
-		private function deselectActor():void {
-			selected = false;
-		}
-		*/
 		
 		//drag the game container with the mouse
 		//when you stop dragging it, it eases to a stop
@@ -135,6 +119,14 @@
 		public function stopDragWorld(event:MouseEvent):void {
 			isDragging = false;
 			Main.theStage.removeEventListener(MouseEvent.MOUSE_UP, startDragWorld);
+		}
+		
+		public function getLastClickedCoordinates():Point {
+			return lastClickedCoordinates;
+		}
+		
+		public function getLastClickedActor():DisplayObject {
+			return lastClickedActors[0];
 		}
 	}
 }
