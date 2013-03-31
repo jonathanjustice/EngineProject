@@ -6,6 +6,7 @@
 	import utilities.Mathematics.MathFormulas;
 	import utilities.Screens.xpBarSystem;
 	import utilities.Actors.Enemy;
+	import utilities.Actors.AFSEnemy;
 	import utilities.Actors.Bullet;
 	public class EnemyManager extends utilities.Engine.DefaultManager{
 		public static var enemies:Array;
@@ -38,7 +39,7 @@
 		//FPO way to create enemies
 		//check the enemies for collisions with bullets
 		public override function updateLoop():void{
-			if(numnum < 999){
+			if(numnum < 5){
 				shittyTimer++;
 				if(shittyTimer ==25){
 					shittyTimer = 0;
@@ -48,12 +49,13 @@
 			checkForCollisionWithBullets();
 		}
 		
-		public static function createNewEnemy():void{
+		public static function createNewEnemy():void {
+			var AFSenemy:AFSEnemy = new AFSEnemy();
 			var enemy:Enemy = new Enemy();
-			enemies.push(enemy);
+			enemies.push(AFSenemy);
 			//give the bullet some placeholder properties
-			enemy.x = Math.random()*500;
-			enemy.y = Math.random()*200;
+			AFSenemy.x = Math.random()*500;
+			AFSenemy.y = Math.random()*200;
 			//var enemyGraphics = enemyFactory.GenerateBody();
 			
 			//placeholder debug var
@@ -61,7 +63,7 @@
 		}
 		
 		public static function checkForCollisionWithBullets():void{
-			for each(var enemy:Enemy in enemies){
+ 			for each(var enemy:MovieClip in enemies){
 				enemy.updateLoop();
 				for each(var bullet:Bullet in BulletManager.bullets){
 					//if(enemy.getQuadTreeNode() == bullet.getQuadTreeNode()){
