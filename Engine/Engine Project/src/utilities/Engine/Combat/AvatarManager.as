@@ -44,8 +44,12 @@
 				
 				for(var i:int = 0; i<LevelManager.levels.length;i++){
 				//a really uneccessarily long way to write hitTestObject, because I can
-					if(utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar,LevelManager.levels[i],true) != false){
-						utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryObjects(myAvatar,LevelManager.levels[i]);
+					//checks for collision
+					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, LevelManager.levels[i], true) != false) {
+						//resolves the collision & returns if this touched the top of the other object
+						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryObjects(myAvatar, LevelManager.levels[i])) {
+							myAvatar.jumpingEnded();
+						}
 					}
 				}
 				myAvatar.setPreviousPosition();

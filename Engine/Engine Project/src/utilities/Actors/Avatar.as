@@ -11,16 +11,17 @@
 	import flash.display.Sprite;
 	import flash.text.*;
 
-	public class Avatar extends SelectableActor{
+	public class Avatar extends JumpingActor{
 		//private var mySprite:Sprite = new Sprite();
 		private var myTextField:TextField = new TextField(); 
 		private var myAngle:Number=0;
-		private var velocityIncrease:Number=6;
-		private var maxSpeed:Number=6;
+		private var velocityIncrease:Number=12;
+		private var maxSpeed:Number=100;
 		private var xVelocity:Number=50;//velocity
 		private var yVelocity:Number=50;
 		public var xDiff:Number=0;
-		public var yDiff:Number=0;
+		public var yDiff:Number = 0;
+		private var isGravitySystemEnabled:Boolean = true;
 		
 		
 		public function Avatar(){
@@ -31,8 +32,8 @@
 		public function setUp():void{
 			addActorToGameEngine();
 			defineGraphics();
-			this.x=450;
-			this.y=250;
+			this.x=350;
+			this.y=50;
 		}
 		
 		public function getAvatarLocation():Point{
@@ -40,7 +41,12 @@
 			return point;
 		}
 		
-		public function updateLoop():void{
+		public function updateLoop():void {
+			getisJumpingFromInputManager();
+			applyGravity(isGravitySystemEnabled);
+			
+			
+			
 			setQuadTreeNode();
 			//get key data
 			getAnglesFromKeyInputManager();
@@ -60,6 +66,7 @@
 			MathFormulas.Point_Object_At_Target(this,target);
 		}
 		*/
+		
 		public function getAnglesFromKeyInputManager():void{
 			this.rotation = Main.keyInputManager.getMyAngle();
 		}

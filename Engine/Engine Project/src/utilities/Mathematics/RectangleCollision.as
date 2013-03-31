@@ -29,31 +29,34 @@ package utilities.Mathematics{
 		 }
 		 
 		//resolves collision between a stationary rectangle and a moving rectangle
-		 public static function resolveCollisionBetweenMovingAndStationaryObjects(movable:MovieClip,stationary:MovieClip):void{
+		 public static function resolveCollisionBetweenMovingAndStationaryObjects(movable:MovieClip, stationary:MovieClip):Boolean {
+			var collidedWithTop:Boolean = false;
 			//above
 			if(movable.getPreviousPosition().y + movable.height/2 <= stationary.y - stationary.height/2 && (movable.getPreviousPosition().x + movable.width/2 >=stationary.x - stationary.width/2 || movable.getPreviousPosition().x - movable.width/2 <=stationary.x + stationary.width/2))//above
 			{
-				movable.y = stationary.y - stationary.height/2 - movable.height/2 -.05;
+				movable.y = stationary.y - stationary.height / 2 - movable.height / 2 -.05;
+				collidedWithTop = true;
 			}
 			//below
 			else if(movable.getPreviousPosition().y - movable.height/2 >= stationary.y + stationary.height/2  && (movable.getPreviousPosition().x + movable.width/2 >=stationary.x - stationary.width/2 || movable.getPreviousPosition().x - movable.width/2 <=stationary.x + stationary.width/2))//below
 			{
-				movable.y = stationary.y + stationary.height/2 + movable.height/2 +.05;
+				movable.y = stationary.y + stationary.height / 2 + movable.height / 2 +.05;
 			}
 			//left
 			else if(movable.getPreviousPosition().x - movable.width/2 <=stationary.x - stationary.width/2 &&  movable.y + movable.height/2 >= stationary.y - stationary.height/2  &&   movable.y - movable.height/2 <= stationary.y + stationary.height/2 )//left
 			{
-				movable.x = (stationary.x - stationary.width/2) - movable.width/2 -.05;
+				movable.x = (stationary.x - stationary.width / 2) - movable.width / 2 -.05;
 			}
 			//right
 			else if(movable.getPreviousPosition().x + movable.width/2 >=stationary.x + stationary.width/2 &&  movable.y + movable.height/2 >= stationary.y - stationary.height/2  &&   movable.y - movable.height/2 <= stationary.y + stationary.height/2 )
 			{
-				movable.x = (stationary.x + stationary.width/2) + movable.width/2 +.05;
+				movable.x = (stationary.x + stationary.width / 2) + movable.width / 2 +.05;
 			}
 			else
 			{
 				movable.y = stationary.y + stationary.height/2 + movable.height/2;
 			}
+			return collidedWithTop;
 		}
 	 }
 }

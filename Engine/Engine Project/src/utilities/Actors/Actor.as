@@ -27,11 +27,37 @@
 		private var actorGraphic:MovieClip;
 		private var target:MovieClip;
 		private var hasTarget:Boolean = false;
-		public var health:Number=1;
+		private var gravity:Number = 4;
+		public var health:Number = 1;
+		private var originalGravity:Number = 3;
+		private var currentGravity:Number=0;
+		private var gravityModifier:Number = 3;
+		private var maxGravity:Number = 20;
 		
 		public function Actor(){
 			defineWeaponStats();
 			//trace("Actor:new actor")
+		}
+		
+		public function applyGravity(isGravitySystemEnabled:Boolean):void {
+			//trace("isGravitySystemEnabled:",isGravitySystemEnabled);
+			if (isGravitySystemEnabled) {
+				currentGravity += gravityModifier;
+				
+				if (currentGravity > maxGravity) {
+					currentGravity = maxGravity
+				}
+				this.y += currentGravity;
+			}
+		}
+		
+		//usually through jumping
+		public function modifiyGravity(gravityModifier:Number):void {
+			currentGravity -= gravityModifier;
+		}
+		
+		public function resetGravity():void {
+			currentGravity = originalGravity;
 		}
 		
 		//BEHAVIOR SECTION
