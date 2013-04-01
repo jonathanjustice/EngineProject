@@ -37,9 +37,13 @@
 			checkForDeathFlag();
 		}
 		
-		private function applyVector():void{
+		public function applyVector():void{
 			this.x += xVelocity;
 			this.y += yVelocity;
+		}
+		
+		public function collidedWithAvatar():void {
+			
 		}
 		
 		//direction indicator is useful for determine what direction the enemy is faceing / moving in / shooting in
@@ -51,7 +55,7 @@
 		*/
 		
 		//this records the moment the bullet was created
-		 private function setSpawnTime():void {
+		public function setSpawnTime():void {
          	spawnTime = getTimer();
 			//trace("spawnTime",spawnTime);
         }

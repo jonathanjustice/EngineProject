@@ -49,23 +49,10 @@
 			checkForCollisionWithBullets();
 		}
 		
-		public static function createNewEnemy():void {
-			var AFSenemy:AFSEnemy = new AFSEnemy();
-			var enemy:Enemy = new Enemy();
-			enemies.push(AFSenemy);
-			//give the bullet some placeholder properties
-			AFSenemy.x = Math.random()*500;
-			AFSenemy.y = Math.random()*200;
-			//var enemyGraphics = enemyFactory.GenerateBody();
-			
-			//placeholder debug var
-			numnum+=1;
-		}
-		
 		public static function checkForCollisionWithBullets():void{
  			for each(var enemy:MovieClip in enemies){
 				enemy.updateLoop();
-				for each(var bullet:Bullet in BulletManager.bullets){
+ 				for each(var bullet:Bullet in BulletManager.bullets){
 					//if(enemy.getQuadTreeNode() == bullet.getQuadTreeNode()){
 						//this whole minDist business really should get pushed down into the math formulas, its confusing to read
 						//perhaps i need to break it into to 2 functions, one that returns and that doesn't
@@ -89,6 +76,19 @@
 		
 		public override function getArray():Array{
 			return enemies;
+		}
+		
+			public static function createNewEnemy():void {
+			var AFSenemy:AFSEnemy = new AFSEnemy();
+			var enemy:Enemy = new Enemy();
+			enemies.push(AFSenemy);
+			//give the bullet some placeholder properties
+			AFSenemy.x = Math.random()*500;
+			AFSenemy.y = Math.random()*200;
+			//var enemyGraphics = enemyFactory.GenerateBody();
+			
+			//placeholder debug var
+			numnum+=1;
 		}
 	}
 }

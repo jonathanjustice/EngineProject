@@ -52,6 +52,18 @@
 						}
 					}
 				}
+				for (var j:int = 0; j < EnemyManager.enemies.length;j++){
+				//a really uneccessarily long way to write hitTestObject, because I can
+					//checks for collision
+					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, EnemyManager.enemies[j], true) != false) {
+						//resolves the collision & returns if this touched the top of the other object
+						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryObjects(myAvatar, EnemyManager.enemies[j])) {
+							myAvatar.jumpingEnded();
+							myAvatar.jump();
+							EnemyManager.enemies[j].markDeathWithoutXpFlag();
+						}
+					}
+				}
 				myAvatar.setPreviousPosition();
 			}
 		}

@@ -41,14 +41,18 @@
 		}
 		
 		//jumping & double jumping
-		public function jump():void {
+		public function checkCurrentjumpCount():void {
 			if (currentJumpCount < maxJumpCount) {
-				this.y -= 10;
-				resetGravity();
-				modifiyGravity(jumpSpeed);
+				jump();
 				currentJumpCount++;
 				//trace("currentJumpCount", currentJumpCount);
 			}
+		}
+		
+		public function jump():void {
+			this.y -= 5;//move up past any collision clips
+			resetGravity();
+			modifiyGravity(jumpSpeed);
 		}
 		
 		//called when this collides with a floor
