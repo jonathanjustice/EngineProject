@@ -27,12 +27,14 @@
 		private var actorGraphic:MovieClip;
 		private var target:MovieClip;
 		private var hasTarget:Boolean = false;
-		private var gravity:Number = 4;
 		public var health:Number = 1;
+		private var gravity:Number = 4;
 		private var originalGravity:Number = 3;
 		private var currentGravity:Number=0;
 		private var gravityModifier:Number = 3;
-		private var maxGravity:Number = 20;
+		private var maxGravity:Number = 25;
+		private var hitBoxWidth:Number = 0;
+		private var hitBoxHeight:Number = 0;
 		
 		public function Actor(){
 			defineWeaponStats();
@@ -118,12 +120,23 @@
 			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
 			actorGraphic.drawGraphic();
 			this.addChild(actorGraphic);
+			
 		}
 		
 		public function defineGraphics2():void{
 			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
 			actorGraphic.drawGraphic2();
 			this.addChild(actorGraphic);
+			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
+			//trace("actorGraphic.width",actorGraphic.width);
+		}
+		
+		public function defineGraphics3():void{
+			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
+			actorGraphic.drawGraphic3();
+			this.addChild(actorGraphic);
+			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
+		//	trace("actorGraphic.width",actorGraphic.width);
 		}
 		
 		public function createProgressBar(bar:String):void{
@@ -243,6 +256,26 @@
 			return hasTarget;
 		}
 		
+		public function get_hitBoxWidth():Number {
+			trace("get_hitBoxWidth",hitBoxWidth);
+			return hitBoxWidth;
+		}
+		
+		public function get_hitBoxHeight():Number {
+			trace("get_hitBoxHeight",hitBoxHeight);
+			return hitBoxHeight;
+		}
+		
+		public function setHitBoxWidth(size:Number):void{
+			hitBoxWidth = size;
+			trace("setHitBoxWidth",size);
+		}
+		
+		public function setHitBoxHeight(size:Number):void{
+			hitBoxHeight = size;
+			trace("hitBoxHeight",size);
+		}
+		
 		//if this actor is tracking a target
 		//force it to no longer track that target
 		public function setTargetToFalse():void{
@@ -254,7 +287,8 @@
 		}
 		
 		//creation & destruction
-		public function addActorToGameEngine():void{
+		public function addActorToGameEngine():void {
+			
 			utilities.Engine.Game.gameContainer.addChild(this);
 		}
 		

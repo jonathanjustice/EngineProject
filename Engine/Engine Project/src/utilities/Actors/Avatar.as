@@ -32,8 +32,10 @@
 		public function setUp():void{
 			addActorToGameEngine();
 			defineGraphics();
-			this.x=350;
-			this.y=50;
+			this.x = 525;
+			this.y = 325;
+			setHitBoxWidth(100);
+			setHitBoxHeight(100);
 		}
 		
 		public function getAvatarLocation():Point{
@@ -44,8 +46,6 @@
 		public function updateLoop():void {
 			getisJumpingFromInputManager();
 			applyGravity(isGravitySystemEnabled);
-			
-			
 			
 			setQuadTreeNode();
 			//get key data

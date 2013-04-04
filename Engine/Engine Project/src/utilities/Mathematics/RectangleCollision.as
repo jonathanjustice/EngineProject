@@ -8,14 +8,13 @@
 package utilities.Mathematics{
 	import flash.display.MovieClip;
 	public class RectangleCollision{  
-	
 		 public function RectangleCollision(){
 			
 		 }
 		 
 		 //check to see if rectangles 1 & 2 are colliding, but no resolution
 		 //in other words, the same things as hitTestObject
-		 public static function simpleIntersection(rect_1:MovieClip,rect_2:MovieClip,boolean:Boolean):Boolean{
+		 public static function simpleIntersection(rect_1:MovieClip,rect_2:MovieClip):Boolean{
 			//If any of these are false, then then the rectangles are not colliding
 			
 			//rect 1's left side is farther right than rect 2's right side
@@ -25,38 +24,41 @@ package utilities.Mathematics{
 			//rect 1's top side is further down than rect 2's bottom side
 			|| rect_1.y > rect_2.y + (rect_2.height) 
 			//rect 1's bottom side is further up than rect 2's top side
-			|| rect_1.y + (rect_1.height) < rect_2.y)
+			|| rect_1.y + (rect_1.height) < rect_2.y);
 		 }
 		 
+		//please update this to handle 2 moving rectangles, if desired
 		//resolves collision between a stationary rectangle and a moving rectangle
-		 public static function resolveCollisionBetweenMovingAndStationaryObjects(movable:MovieClip, stationary:MovieClip):Boolean {
+		 public static function resolveCollisionBetweenMovingAndStationaryRectangles(movable:MovieClip, stationary:MovieClip):String {
+			var collisionEjectDistance:Number = .01;//don't get stuck in the other rectangle
 			var collidedWithTop:Boolean = false;
-			//above
-			if(movable.getPreviousPosition().y + movable.height/2 <= stationary.y - stationary.height/2 && (movable.getPreviousPosition().x + movable.width/2 >=stationary.x - stationary.width/2 || movable.getPreviousPosition().x - movable.width/2 <=stationary.x + stationary.width/2))//above
-			{
-				movable.y = stationary.y - stationary.height / 2 - movable.height / 2 -.05;
-				collidedWithTop = true;
+			var collisionSide:String = "";
+		
+			//moveable is above stationary
+			if (movable.getPreviousPosition().y + movable.height <= stationary.y) {
+				collisionSide = "top";
+				movable.y = stationary.y - movable.height - collisionEjectDistance;
 			}
-			//below
-			else if(movable.getPreviousPosition().y - movable.height/2 >= stationary.y + stationary.height/2  && (movable.getPreviousPosition().x + movable.width/2 >=stationary.x - stationary.width/2 || movable.getPreviousPosition().x - movable.width/2 <=stationary.x + stationary.width/2))//below
-			{
-				movable.y = stationary.y + stationary.height / 2 + movable.height / 2 +.05;
+			//movable is below stationary
+			else if (movable.getPreviousPosition().y >= stationary.y + stationary.height) {
+				movable.y = stationary.y + stationary.height + collisionEjectDistance;
+				collisionSide = "bottom";
 			}
-			//left
-			else if(movable.getPreviousPosition().x - movable.width/2 <=stationary.x - stationary.width/2 &&  movable.y + movable.height/2 >= stationary.y - stationary.height/2  &&   movable.y - movable.height/2 <= stationary.y + stationary.height/2 )//left
-			{
-				movable.x = (stationary.x - stationary.width / 2) - movable.width / 2 -.05;
+			//moveable's is to the left
+			else if (movable.getPreviousPosition().x + movable.width <= stationary.getPreviousPosition().x) {
+				movable.x = stationary.getPreviousPosition().x - movable.width - collisionEjectDistance;
+				collisionSide = "left";
 			}
-			//right
-			else if(movable.getPreviousPosition().x + movable.width/2 >=stationary.x + stationary.width/2 &&  movable.y + movable.height/2 >= stationary.y - stationary.height/2  &&   movable.y - movable.height/2 <= stationary.y + stationary.height/2 )
-			{
-				movable.x = (stationary.x + stationary.width / 2) + movable.width / 2 +.05;
+			//moveable is to the right
+			else if (movable.getPreviousPosition().x >= stationary.getPreviousPosition().x + stationary.width) {
+				movable.x = stationary.getPreviousPosition().x + stationary.width + collisionEjectDistance;
+				collisionSide = "right";
 			}
-			else
-			{
-				movable.y = stationary.y + stationary.height/2 + movable.height/2;
+			else{
+				trace("else, this should never fire, if it does, WHAT DID YOU DO?");
+				//movable.y = stationary.y - movable.height - collisionEjectDistance;
 			}
-			return collidedWithTop;
+			return collisionSide;
 		}
 	 }
 }

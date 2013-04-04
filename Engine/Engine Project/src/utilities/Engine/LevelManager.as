@@ -21,16 +21,17 @@
 		}
 		
 		public function create_a_bunch_of_walls_forTesting():void{
-			var theX:Number = 50;
-			var theY:Number = 50;
+			var theX:Number = 25;
+			var theY:Number = 25;
 			for(var i:int=0;i<5;i++){
-				theX+=50;
-				theY+=50;
+				theX+=100;
+				theY+=100;
 				var wall:Wall = new Wall();
 				wall.x=theX;
 				wall.y=theY;
 				levels.push(wall);
-				//wall.setPreviousPosition();
+				wall.setPreviousPosition();
+				
 			}
 		}
 		

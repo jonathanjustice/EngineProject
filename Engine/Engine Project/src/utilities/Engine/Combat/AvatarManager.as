@@ -41,23 +41,25 @@
 		public override function updateLoop():void{
 			for each(var myAvatar:Avatar in avatars){
 				myAvatar.updateLoop();
-				
-				for(var i:int = 0; i<LevelManager.levels.length;i++){
+				//for some horrible ass backwards reason, I included the level itself in the same array as the walls inside the level, so the iteration needs to start at 1
+				//this is unnacceptable and needs to get fixed asap because it is super confusing and inconsistent.
+				for(var i:int = 1; i<LevelManager.levels.length;i++){
 				//a really uneccessarily long way to write hitTestObject, because I can
 					//checks for collision
-					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, LevelManager.levels[i], true) != false) {
+					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, LevelManager.levels[i]) != false) {
 						//resolves the collision & returns if this touched the top of the other object
-						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryObjects(myAvatar, LevelManager.levels[i])) {
+						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryRectangles(myAvatar, LevelManager.levels[i]) == "top") {
 							myAvatar.jumpingEnded();
+							myAvatar.resetGravity();
 						}
 					}
 				}
 				for (var j:int = 0; j < EnemyManager.enemies.length;j++){
 				//a really uneccessarily long way to write hitTestObject, because I can
 					//checks for collision
-					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, EnemyManager.enemies[j], true) != false) {
+					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, EnemyManager.enemies[j]) != false) {
 						//resolves the collision & returns if this touched the top of the other object
-						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryObjects(myAvatar, EnemyManager.enemies[j])) {
+						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryRectangles(myAvatar, EnemyManager.enemies[j]) =="top") {
 							myAvatar.jumpingEnded();
 							myAvatar.jump();
 							EnemyManager.enemies[j].markDeathWithoutXpFlag();

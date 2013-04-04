@@ -7,7 +7,9 @@
 	import utilities.Screens.xpBarSystem;
 	import utilities.Actors.Enemy;
 	import utilities.Actors.AFSEnemy;
+	import utilities.Actors.GoonEnemy;
 	import utilities.Actors.Bullet;
+	import utilities.Engine.LevelManager;
 	public class EnemyManager extends utilities.Engine.DefaultManager{
 		public static var enemies:Array;
 		private var xVelocity:Number;
@@ -39,7 +41,7 @@
 		//FPO way to create enemies
 		//check the enemies for collisions with bullets
 		public override function updateLoop():void{
-			if(numnum < 5){
+			if(numnum < 0){
 				shittyTimer++;
 				if(shittyTimer ==25){
 					shittyTimer = 0;
@@ -47,6 +49,7 @@
 				}
 			}
 			checkForCollisionWithBullets();
+			checkForCollisionWithWall();
 		}
 		
 		public static function checkForCollisionWithBullets():void{
@@ -66,6 +69,29 @@
 			}
 		}
 		
+		public static function checkForCollisionWithWall():void {
+			for each(var enemy:MovieClip in enemies){
+				for(var i:int = 0; i<LevelManager.levels.length;i++){
+					if (utilities.Mathematics.RectangleCollision.simpleIntersection(enemy, LevelManager.levels[i]) != false) {
+						//resolves the collision & returns if this touched the top of the other object
+						var collisionSide:String = utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryRectangles(enemy, LevelManager.levels[i]);
+						trace("collisionSide",collisionSide);
+						if (collisionSide == "left" || collisionSide == "right") {
+							
+							//enemy.jumpingEnded();
+							enemy.reverseVelecityX();
+						}
+						if (collisionSide == "top") {
+							
+							//enemy.jumpingEnded();
+							enemy.resetGravity();
+						}
+					}
+				}
+				enemy.setPreviousPosition();
+			}
+		}
+		
 		public override function getArrayLength():int{
 			return enemies.length;
 		}
@@ -80,11 +106,12 @@
 		
 			public static function createNewEnemy():void {
 			var AFSenemy:AFSEnemy = new AFSEnemy();
+			var Goonenemy:GoonEnemy = new GoonEnemy();
 			var enemy:Enemy = new Enemy();
-			enemies.push(AFSenemy);
-			//give the bullet some placeholder properties
-			AFSenemy.x = Math.random()*500;
-			AFSenemy.y = Math.random()*200;
+			enemies.push(Goonenemy);
+			//give the enemy some placeholder properties
+			Goonenemy.x = Math.random()*500;
+			Goonenemy.y = Math.random()*200;
 			//var enemyGraphics = enemyFactory.GenerateBody();
 			
 			//placeholder debug var

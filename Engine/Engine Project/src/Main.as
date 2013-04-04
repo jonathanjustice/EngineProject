@@ -46,7 +46,7 @@
 			//loader.addEventListener(BulkProgressEvent.COMPLETE,doneLoading);
 			//loader.start();
 			initialSetup();
-			
+			//var newGraphic = new test_graphic();
         }
 		
 		//define the stage for use in other classes

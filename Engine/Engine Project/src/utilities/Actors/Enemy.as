@@ -11,8 +11,8 @@
 		private var xpToApply:int=0;
 		private var spawnTime:Number;
 		private var lifeSpan:Number = 2;//3 seconds
-		private var xVelocity:Number=0;//velocity
-		private var yVelocity:Number=0;
+		public var xVelocity:Number=0;//velocity
+		public var yVelocity:Number=0;
 		
 		
 		//private var availableForTargeting:Boolean=true;
@@ -80,6 +80,15 @@
 		
 		public function get_xpToApply():int{
 			return xpToApply;
+		}
+		
+		public function reverseVelecityX():void {
+			trace("reverseVelecityX");
+			this.xVelocity *= -1;
+		}
+		
+		public function reverseVelecityY():void {
+			this.yVelocity *= -1;
 		}
 	}
 }

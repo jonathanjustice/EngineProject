@@ -32,32 +32,28 @@
 			}
 			if(isJumpingEnabled){
 				if (Main.keyInputManager.getSpace() == true) {
-					jump();
+					checkCurrentjumpCount();
 					isJumpingEnabled = false;
 					//trace("jump is enabled")
 				}
 			}
-			
 		}
 		
 		//jumping & double jumping
 		public function checkCurrentjumpCount():void {
 			if (currentJumpCount < maxJumpCount) {
 				jump();
-				currentJumpCount++;
-				//trace("currentJumpCount", currentJumpCount);
 			}
 		}
 		
 		public function jump():void {
-			this.y -= 5;//move up past any collision clips
 			resetGravity();
 			modifiyGravity(jumpSpeed);
+			currentJumpCount++;
 		}
 		
 		//called when this collides with a floor
 		public function jumpingEnded():void {
-			//trace("jumpingEnded");
 			currentJumpCount = 0;
 		}
 	}

@@ -21,6 +21,7 @@ package utilities.Engine.Combat{
 	public class BulletManager extends utilities.Engine.DefaultManager{
 		
 		public static var bullets:Array;
+		public static var enemyBullets:Array;
 		private var gameTimer:Timer = new Timer(0,0);
 		private static var currentDelay:int = 0;
 		private static var delay:int = 1;
@@ -42,6 +43,9 @@ package utilities.Engine.Combat{
 			for each(var bullet:Bullet in bullets){
 				bullet.updateLoop();
 			}
+			for each(var enemyBullet:Bullet in enemyBullets){
+				bullet.updateLoop();
+			}
 			if_shooting_create_a_new_bullet();
 		}
 		
@@ -54,6 +58,11 @@ package utilities.Engine.Combat{
 					//trace("BulletManager: createBullet");
 				}
 			}
+		}
+		
+		public static function createEnemyBullet():void {
+			var newBullet:Bullet = new Bullet()
+			bullets.push(newBullet);
 		}
 		
 		public static function createNewBullet():void{

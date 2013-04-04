@@ -128,6 +128,49 @@ package utilities.Actors{
 			}*/
 		}
 		
+		public function setEnemyBulletLocationAndVector(spawnPoint:Point,newRotation:Number):void{
+			//trace("setInitialLocationAndVector");
+			spawnPoint = Game.avatarManager.getAvatarLocation();
+			newRotation = Game.avatarManager.getAvatarAngle()-90;
+			//trace("spawnPoint",spawnPoint);
+			var vector:Point;
+			//variances that come from bullet properties that affect spawning
+			var spread:Number;
+			//trace("setSpawnTime");
+			setSpawnTime();
+			//get initial position from the avatar
+			this.x = spawnPoint.x;
+			this.y = spawnPoint.y;
+			//trace(this.x);
+			//get initial velocity from keyInputManager or avatar direction based on controller input
+			
+			this.rotation = newRotation;
+			
+			//if the vector is affected by bullet properties
+			if(utilities.Actors.Stats.WeaponStats.getBlobular() > 0){
+				/*spread = change_vector_based_on_bullet_properties();
+				spread = Math.random()*spread*2 - spread;
+				vector = MathFormulas.degreesToSlope(Game.avatarManager.getAvatarAngle() + spread);
+				this.rotation += spread; */
+			}else{
+				//if the vector is not affected by bullet properties
+				vector = MathFormulas.degreesToSlope(Game.avatarManager.getAvatarAngle());
+			}
+			
+			//angle based on direction avatar is facing when the bullet is spawned
+			xVelocity = velocityMultiplier * vector.x;
+			yVelocity = velocityMultiplier * vector.y;
+			
+			//used when keeping speed but changing angle or rotatiing
+			var totalmove:Number = Math.sqrt(xVelocity * xVelocity + yVelocity * yVelocity);
+				
+			//apply easing
+			xVelocity = speed*xVelocity/totalmove;
+			yVelocity = speed*yVelocity/totalmove;
+			//trace(this.x);
+		}
+		
+		
 		public function setInitialLocationAndVector():void{
 			//trace("setInitialLocationAndVector");
 			var spawnPoint:Point = Game.avatarManager.getAvatarLocation();

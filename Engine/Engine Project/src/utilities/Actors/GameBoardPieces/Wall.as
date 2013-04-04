@@ -9,10 +9,10 @@
 		}
 		
 		public function setUp():void{
-			defineGraphics2();
+			defineGraphics3();
 			addActorToGameEngine();
 			setPreviousPosition();
-			//trace("Wall:Setup");
+			
 		}
 		
 		public function updateLoop():void{
