@@ -28,6 +28,7 @@
 		private var target:MovieClip;
 		private var hasTarget:Boolean = false;
 		public var health:Number = 1;
+		public var maximumHealth:Number = 1;
 		private var gravity:Number = 4;
 		private var originalGravity:Number = 3;
 		private var currentGravity:Number=0;
@@ -301,7 +302,8 @@
 		}
 		
 		public function testFunction():void{
-			trace(this,"Actor: class exists, probably means you fucked up somewhere else, or you can't access the object you want inside the class.")
+			trace(this, "Actor: class exists, probably means you fucked up somewhere else, or you can't access the object you want inside the class.");
 		}
+		
 	}
 }

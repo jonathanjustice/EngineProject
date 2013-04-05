@@ -13,6 +13,11 @@
 		private var lifeSpan:Number = 2;//3 seconds
 		public var xVelocity:Number=0;//velocity
 		public var yVelocity:Number=0;
+		private var numberOfWallsBeingTouched:int = 0;
+		private var isRechargingHealth:Boolean = false;
+		private var rechargeHealthTimer:int = 0;
+		private var rechargeHealthTime:int = 90;
+		private var isVulnerable:Boolean = false;
 		
 		
 		//private var availableForTargeting:Boolean=true;
@@ -20,7 +25,7 @@
 		
 		public function Enemy(){
 			setUp();
-			health=10;
+			//health=1;
 		}
 		
 		public function setUp():void{
@@ -37,9 +42,12 @@
 			checkForDeathFlag();
 		}
 		
-		public function applyVector():void{
-			this.x += xVelocity;
-			this.y += yVelocity;
+		//if the enemy is not stunned, then move forward
+		public function applyVector():void {
+			if (!isVulnerable) {	
+				this.x += xVelocity;
+				this.y += yVelocity;
+			}
 		}
 		
 		public function collidedWithAvatar():void {
@@ -83,12 +91,52 @@
 		}
 		
 		public function reverseVelecityX():void {
-			trace("reverseVelecityX");
+			
 			this.xVelocity *= -1;
 		}
 		
 		public function reverseVelecityY():void {
 			this.yVelocity *= -1;
+		}
+		
+		public function setNumberOfWallsBeingTouched(amount:int):void {
+			numberOfWallsBeingTouched += amount;
+		}
+		
+		public function getNumberOfWallsBeingTouched():int {
+			return numberOfWallsBeingTouched;
+		}
+		
+		//if its damaged, it becomes vulnerable and starts recharging health
+		//if it is below max health it recharges until it reaches max health
+		public function rechargeHealth():void {
+			if (health < maximumHealth) {
+				isRechargingHealth = true;
+				isVulnerable = true;
+			}
+			if (isRechargingHealth) {
+				//trace("isRecharging");
+				rechargeHealthTimer++;
+			}
+			if (rechargeHealthTimer >= rechargeHealthTime) {
+				//trace("recharge Time Complete");
+				rechargeHealthTimer = 0;
+				health++;
+				if (health >= maximumHealth) {
+					//trace("maxmimum health reached");
+					health = maximumHealth;
+					isRechargingHealth = false;
+					isVulnerable = false;
+				}
+			}
+		}
+		
+		public function getIsVulnerable():Boolean {
+			return isVulnerable;
+		}
+		
+		public function startHealthRechargeTimer():void{
+			isRechargingHealth = true;
 		}
 	}
 }

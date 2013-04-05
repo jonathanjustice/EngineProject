@@ -24,7 +24,7 @@
 			var theX:Number = 25;
 			var theY:Number = 25;
 			for(var i:int=0;i<5;i++){
-				theX+=100;
+				theX+=200;
 				theY+=100;
 				var wall:Wall = new Wall();
 				wall.x=theX;

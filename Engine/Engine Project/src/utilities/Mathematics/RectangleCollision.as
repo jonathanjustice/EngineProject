@@ -60,5 +60,18 @@ package utilities.Mathematics{
 			}
 			return collisionSide;
 		}
+		
+		public static function isRectangleOnTop(movable:MovieClip, stationary:MovieClip):Boolean {
+			var isOnTop:Boolean = false;
+			if (movable.getPreviousPosition().y + movable.height <= stationary.y) {
+				if (movable.getPreviousPosition().x + movable.width >= stationary.getPreviousPosition().x + stationary.width) {
+					isOnTop = true;
+				}
+				if (movable.getPreviousPosition().x <= stationary.getPreviousPosition().x) {
+					isOnTop = true;
+				}
+			}
+			return isOnTop;
+		}
 	 }
 }

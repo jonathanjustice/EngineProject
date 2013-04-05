@@ -3,7 +3,7 @@
 	import utilities.Mathematics.MathFormulas;
 	import utilities.Input.KeyInputManager;
 	import flash.utils.getTimer;
-	public class GoonEnemy extends Enemy{
+	public class TankEnemy extends Enemy{
 		
 		//private var gameContainer;
 		private var velocityMultiplier:Number=15;
@@ -19,10 +19,11 @@
 		//private var availableForTargeting:Boolean=true;
 		
 		
-		public function GoonEnemy() {
+		public function TankEnemy() {
 			xVelocity = -5;
 			setUp();
-			health=1;
+			health = 2;
+			maximumHealth = 2;
 		}
 		
 		public override function updateLoop():void {
@@ -34,7 +35,7 @@
 			//doStuffToEnemyOverTime();
 			checkForDamage();
 			checkForDeathFlag();
-			
+			rechargeHealth();
 		}
 		
 		public function walk():void {
@@ -42,8 +43,10 @@
 		}
 		
 		public override function applyVector():void {
-			this.x += xVelocity;
-			this.y += yVelocity;
+			if (!getIsVulnerable()) {	
+				this.x += xVelocity;
+				this.y += yVelocity;
+			}
 		}
 		
 	}

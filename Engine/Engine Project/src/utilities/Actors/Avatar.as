@@ -21,6 +21,7 @@
 		private var yVelocity:Number=50;
 		public var xDiff:Number=0;
 		public var yDiff:Number = 0;
+		private var jumpDamage:int = 1;
 		private var isGravitySystemEnabled:Boolean = true;
 		
 		
@@ -32,7 +33,7 @@
 		public function setUp():void{
 			addActorToGameEngine();
 			defineGraphics();
-			this.x = 525;
+			this.x = 725;
 			this.y = 325;
 			setHitBoxWidth(100);
 			setHitBoxHeight(100);
@@ -98,6 +99,10 @@
 		
 		public override function getActor():MovieClip{
 			return this;
+		}
+		
+		public function getJumpDamage():int {
+			return jumpDamage;
 		}
 	}
 }

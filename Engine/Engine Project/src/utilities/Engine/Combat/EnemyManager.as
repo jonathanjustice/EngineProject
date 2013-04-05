@@ -8,6 +8,7 @@
 	import utilities.Actors.Enemy;
 	import utilities.Actors.AFSEnemy;
 	import utilities.Actors.GoonEnemy;
+	import utilities.Actors.TankEnemy;
 	import utilities.Actors.Bullet;
 	import utilities.Engine.LevelManager;
 	public class EnemyManager extends utilities.Engine.DefaultManager{
@@ -30,6 +31,7 @@
 			numnum = 0;
 			enemies =[];
 			placeholderValues();
+			createNewEnemy();
 		}
 		
 		private function placeholderValues():void{
@@ -41,13 +43,14 @@
 		//FPO way to create enemies
 		//check the enemies for collisions with bullets
 		public override function updateLoop():void{
-			if(numnum < 0){
+			/*if(numnum < 0){
 				shittyTimer++;
 				if(shittyTimer ==25){
 					shittyTimer = 0;
 					createNewEnemy();
 				}
-			}
+			}*/
+			
 			checkForCollisionWithBullets();
 			checkForCollisionWithWall();
 		}
@@ -70,21 +73,27 @@
 		}
 		
 		public static function checkForCollisionWithWall():void {
-			for each(var enemy:MovieClip in enemies){
+			for each(var enemy:MovieClip in enemies) {
+				enemy.setNumberOfWallsBeingTouched(-enemy.getNumberOfWallsBeingTouched());
 				for(var i:int = 0; i<LevelManager.levels.length;i++){
 					if (utilities.Mathematics.RectangleCollision.simpleIntersection(enemy, LevelManager.levels[i]) != false) {
 						//resolves the collision & returns if this touched the top of the other object
 						var collisionSide:String = utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryRectangles(enemy, LevelManager.levels[i]);
-						trace("collisionSide",collisionSide);
+						//trace("collisionSide",collisionSide);
 						if (collisionSide == "left" || collisionSide == "right") {
-							
 							//enemy.jumpingEnded();
 							enemy.reverseVelecityX();
 						}
 						if (collisionSide == "top") {
-							
+							enemy.setNumberOfWallsBeingTouched(1);
 							//enemy.jumpingEnded();
 							enemy.resetGravity();
+							if (enemy is TankEnemy) {
+								if (utilities.Mathematics.RectangleCollision.isRectangleOnTop(enemy, LevelManager.levels[i]) && enemy.getNumberOfWallsBeingTouched() == 1) {
+									enemy.reverseVelecityX();
+									enemy.x += enemy.xVelocity * 2;
+								}
+							}
 						}
 					}
 				}
@@ -104,7 +113,20 @@
 			return enemies;
 		}
 		
-			public static function createNewEnemy():void {
+		public static function createNewEnemy():void {
+			//var AFSenemy:AFSEnemy = new AFSEnemy();
+			//var goonEnemy:GoonEnemy = new GoonEnemy();
+			var tankEnemy:TankEnemy = new TankEnemy();
+			//var enemy:Enemy = new Enemy();
+			enemies.push(tankEnemy);
+			//give the enemy some placeholder properties
+			tankEnemy.x = 550;
+			tankEnemy.y = 100;
+			//var enemyGraphics = enemyFactory.GenerateBody();
+		
+		}
+		
+		public static function createNewRandomEnemy():void {
 			var AFSenemy:AFSEnemy = new AFSEnemy();
 			var Goonenemy:GoonEnemy = new GoonEnemy();
 			var enemy:Enemy = new Enemy();

@@ -44,7 +44,7 @@
 		public function drawGraphic3():void{
 			myGraphic.graphics.lineStyle(3,0x0000ff);
 			myGraphic.graphics.beginFill(0x8800FF);
-			myGraphic.graphics.drawRect(0,0,100,100);
+			myGraphic.graphics.drawRect(0,0,300,100);
 			myGraphic.graphics.endFill();
 			this.addChild(myGraphic);
 		}

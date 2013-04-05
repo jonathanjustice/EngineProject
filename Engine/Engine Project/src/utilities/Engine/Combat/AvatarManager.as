@@ -62,7 +62,7 @@
 						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryRectangles(myAvatar, EnemyManager.enemies[j]) =="top") {
 							myAvatar.jumpingEnded();
 							myAvatar.jump();
-							EnemyManager.enemies[j].markDeathWithoutXpFlag();
+							EnemyManager.enemies[j].takeDamage(myAvatar.getJumpDamage());
 						}
 					}
 				}
