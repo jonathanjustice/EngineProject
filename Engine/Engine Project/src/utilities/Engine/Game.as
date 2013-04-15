@@ -3,6 +3,7 @@
 	import flash.display.MovieClip;
 	import flash.geom.Point;
 	import utilities.Screens.GameContainer;
+	import utilities.Engine.ResourceManager;
 	import utilities.Engine.Builders.LevelBuilder;
 	import utilities.Engine.Builders.LootManager;
 	import utilities.Engine.Combat.CombatManager;
@@ -16,6 +17,7 @@
 	
 	public class Game extends MovieClip{
 		public static var theGame:Game;
+		public static var resourceManager:ResourceManager;
 		public static var avatarManager:AvatarManager;
 		public static var bulletManager:BulletManager;
 		public static var enemyManager:EnemyManager;
@@ -109,7 +111,8 @@
 			
 		}
 		
-		private static function createManagersAndControllers():void{
+		private static function createManagersAndControllers():void {
+			createResourceManager();
 			createLevelManager();
 			createLevelBuilder();
 			createAvatarManager();
@@ -119,6 +122,10 @@
 			createLootManager();
 			createSoundManager();
 			createSaveDataManager();
+		}
+		
+		private static function createResourceManager():void {
+			resourceManager = new ResourceManager();
 		}
 		
 		private static function createLevelManager():void{

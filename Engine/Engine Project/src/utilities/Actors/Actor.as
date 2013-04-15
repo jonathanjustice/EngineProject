@@ -24,7 +24,7 @@
 		private var previousPosition:Point = new Point(0,0);
 		private var quadTreeNode:int;
 		private var weaponStats:Object;
-		private var actorGraphic:MovieClip;
+		public var actorGraphic:MovieClip;
 		private var target:MovieClip;
 		private var hasTarget:Boolean = false;
 		public var health:Number = 1;
@@ -36,12 +36,17 @@
 		private var maxGravity:Number = 25;
 		private var hitBoxWidth:Number = 0;
 		private var hitBoxHeight:Number = 0;
+		private var isInvincible:Boolean = false;
 		
 		public function Actor(){
 			defineWeaponStats();
 			//trace("Actor:new actor")
 		}
 		
+		/*
+		------------GRAVITY
+					
+		*/
 		public function applyGravity(isGravitySystemEnabled:Boolean):void {
 			//trace("isGravitySystemEnabled:",isGravitySystemEnabled);
 			if (isGravitySystemEnabled) {
@@ -63,14 +68,40 @@
 			currentGravity = originalGravity;
 		}
 		
-		//BEHAVIOR SECTION
-		//This needs to be put somewhere else, this is an awful place for it as long as I am using 1 giant master stats file
-		//might make sense once once things are more generative...
+		/*
+		------------BEHAVIOR
+					This needs to be put somewhere else, this is an awful place for it as long as I am using 1 giant master stats file
+					might make sense once once things are more generative...
+		*/
+		public function defineProperties():void{
+			
+		}
+		
 		public function defineWeaponStats():void{
 			weaponStats = new utilities.Actors.Stats.WeaponStats();
 		}
+					
+		public function Point_Actor_At_Target(target:Point):void{
+			MathFormulas.Point_Object_At_Target(this,target);
+		}
 		
-		//use this to ha
+		/*
+		------------CREATION, DESTRUCTION, DAMAGE & DEATH
+					
+		*/
+					
+		//creation & destruction
+		public function addActorToGameEngine():void {
+			utilities.Engine.Game.gameContainer.addChild(this);
+		}
+		
+		public function removeActorFromGameEngine(actor:MovieClip,array:Array):void{
+			actor.availableForTargeting=false;
+			var index:int = array.indexOf(actor);
+			array.splice(index,1);
+			utilities.Engine.Game.gameContainer.removeChild(actor);
+			actor.setTargetToFalse();
+		}
 		public function takeDamage(amount:Number):void{
 			this.health -= amount;
 		}
@@ -108,20 +139,18 @@
 			}
 		}
 		
-		public function Point_Actor_At_Target(target:Point):void{
-			MathFormulas.Point_Object_At_Target(this,target);
-		}
 		
-		//DISPLAY & FEEDBACK SECTION
-		
+		/*
+		------------DISPLAY & FEEDBACK
+					
+		*/
 		
 		//create the grapic for the actor
 		//uses a default vector rectangle if nothing else is defined 
 		public function defineGraphics():void{
 			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
-			actorGraphic.drawGraphic();
+			actorGraphic.loadSwf();
 			this.addChild(actorGraphic);
-			
 		}
 		
 		public function defineGraphics2():void{
@@ -135,6 +164,30 @@
 		public function defineGraphics3():void{
 			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
 			actorGraphic.drawGraphic3();
+			this.addChild(actorGraphic);
+			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
+		//	trace("actorGraphic.width",actorGraphic.width);
+		}
+		
+		public function defineGraphics4():void{
+			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
+			actorGraphic.drawGraphic4();
+			this.addChild(actorGraphic);
+			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
+		//	trace("actorGraphic.width",actorGraphic.width);
+		}
+		
+		public function defineGraphics5():void{
+			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
+			actorGraphic.drawGraphic5();
+			this.addChild(actorGraphic);
+			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
+		//	trace("actorGraphic.width",actorGraphic.width);
+		}
+		
+		public function defineGraphics6():void{
+			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
+			actorGraphic.drawGraphic6();
 			this.addChild(actorGraphic);
 			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
 		//	trace("actorGraphic.width",actorGraphic.width);
@@ -186,12 +239,11 @@
 			
 		}
 		
-		public function defineProperties():void{
-			
-		}
+		
 		
 		/*
-		*	GETTERS & SETTERS
+		------------GETTERS & SETTERS
+					
 		*/
 		
 		public function getLocation():Point{
@@ -207,7 +259,7 @@
 		
 		//useful for collision detection
 		//in case the object gets into an invalid location
-		//you can use this to put it back where it was
+		//you can use this to put it back where it was if a new location cannot be resolved
 		public function getPreviousPosition():Point{
 			return previousPosition;
 		}
@@ -287,23 +339,24 @@
 			hasTarget = true;
 		}
 		
-		//creation & destruction
-		public function addActorToGameEngine():void {
-			
-			utilities.Engine.Game.gameContainer.addChild(this);
+		public function getIsInvincible():Boolean {
+			return isInvincible;
 		}
 		
-		public function removeActorFromGameEngine(actor:MovieClip,array:Array):void{
-			actor.availableForTargeting=false;
-			var index:int = array.indexOf(actor);
-			array.splice(index,1);
-			utilities.Engine.Game.gameContainer.removeChild(actor);
-			actor.setTargetToFalse();
+		public function setInvincibility(invincibility:Boolean):void {
+			isInvincible = invincibility;
+		}
+		
+		public function traceProperties():void {
+			trace("health:",health);
+			trace("actorGraphic.assignedGraphic",actorGraphic.assignedGraphic);
+			trace("actorGraphic.assignedGraphic.mc_circle",actorGraphic.assignedGraphic.mc_circle);
+			trace("actorGraphic.assignedGraphic.children",actorGraphic.assignedGraphic.children);
+			trace("actorGraphic.assignedGraphic.numChildren",actorGraphic.assignedGraphic.numChildren);
 		}
 		
 		public function testFunction():void{
 			trace(this, "Actor: class exists, probably means you fucked up somewhere else, or you can't access the object you want inside the class.");
 		}
-		
 	}
 }

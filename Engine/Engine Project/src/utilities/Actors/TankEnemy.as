@@ -24,6 +24,7 @@
 			setUp();
 			health = 2;
 			maximumHealth = 2;
+			defineGraphics6();
 		}
 		
 		public override function updateLoop():void {

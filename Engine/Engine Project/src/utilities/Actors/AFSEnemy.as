@@ -11,20 +11,15 @@
 		private var xpToApply:int=0;
 		private var spawnTime:Number;
 		private var lifeSpan:Number = 2;//3 seconds
-	//	private var xVelocity:Number=5;//velocity
-		//private var yVelocity:Number=5;
 		
-		
-		//private var availableForTargeting:Boolean=true;
-		
-		
-		public function AFSEnemy(){
+		public function AFSEnemy() {
+			xVelocity = -1;
 			setUp();
-			health=10;
+			health=1;
+			defineGraphics5();
 		}
 		
 		public override function updateLoop():void {
-			//trace("AFS Enemy update loop");
 			setQuadTreeNode();
 			applyVector();
 			//doStuffToEnemyOverTime();
@@ -34,7 +29,8 @@
 		}
 		
 		public function walk():void {
-			this.x -= xVelocity;
+			this.x += xVelocity;
+			//this.y -= 1;
 		}
 	}
 }

@@ -114,14 +114,19 @@
 		}
 		
 		public static function createNewEnemy():void {
-			//var AFSenemy:AFSEnemy = new AFSEnemy();
-			//var goonEnemy:GoonEnemy = new GoonEnemy();
+			var AFSenemy:AFSEnemy = new AFSEnemy();
+			var goonEnemy:GoonEnemy = new GoonEnemy();
 			var tankEnemy:TankEnemy = new TankEnemy();
-			//var enemy:Enemy = new Enemy();
+			enemies.push(AFSenemy);
+			enemies.push(goonEnemy);
 			enemies.push(tankEnemy);
 			//give the enemy some placeholder properties
+			AFSenemy.x = 350;
+			AFSenemy.y = 5;
+			goonEnemy.x = 450;
+			goonEnemy.y = 75;
 			tankEnemy.x = 550;
-			tankEnemy.y = 100;
+			tankEnemy.y = 75;
 			//var enemyGraphics = enemyFactory.GenerateBody();
 		
 		}

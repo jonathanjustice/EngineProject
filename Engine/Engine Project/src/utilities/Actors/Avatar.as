@@ -22,8 +22,8 @@
 		public var xDiff:Number=0;
 		public var yDiff:Number = 0;
 		private var jumpDamage:int = 1;
+		private var invincibilityDamage:int = 5;
 		private var isGravitySystemEnabled:Boolean = true;
-		
 		
 		public function Avatar(){
 			setUp();
@@ -33,8 +33,8 @@
 		public function setUp():void{
 			addActorToGameEngine();
 			defineGraphics();
-			this.x = 725;
-			this.y = 325;
+			this.x = 750;
+			this.y = 125;
 			setHitBoxWidth(100);
 			setHitBoxHeight(100);
 		}
@@ -51,6 +51,7 @@
 			setQuadTreeNode();
 			//get key data
 			getAnglesFromKeyInputManager();
+			
 			//get the velocity
 			getVelocityFromKeyInputManager();
 			//getRotationFromKeyInputManager();
@@ -103,6 +104,10 @@
 		
 		public function getJumpDamage():int {
 			return jumpDamage;
+		}
+		
+		public function getInvincibilityDamage():int {
+			return invincibilityDamage;
 		}
 	}
 }

@@ -58,6 +58,10 @@
 				//a really uneccessarily long way to write hitTestObject, because I can
 					//checks for collision
 					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, EnemyManager.enemies[j]) != false) {
+						//if the avatar is invincible, damag the enemy
+						if (myAvatar.getIsInvincible()) {
+							EnemyManager.enemies[j].takeDamage(myAvatar.getInvincibilityDamage());
+						}
 						//resolves the collision & returns if this touched the top of the other object
 						if (utilities.Mathematics.RectangleCollision.resolveCollisionBetweenMovingAndStationaryRectangles(myAvatar, EnemyManager.enemies[j]) =="top") {
 							myAvatar.jumpingEnded();
