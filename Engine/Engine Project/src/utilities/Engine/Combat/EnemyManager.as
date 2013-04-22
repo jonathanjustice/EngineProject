@@ -55,6 +55,7 @@
 			checkForCollisionWithWall();
 		}
 		
+		//this could possibly be better abstracted by generalizing the colliding objects, i.e. pass in both arrays rather than hard code them
 		public static function checkForCollisionWithBullets():void{
  			for each(var enemy:MovieClip in enemies){
 				enemy.updateLoop();
@@ -101,6 +102,14 @@
 			}
 		}
 		
+		public function deselectActors():void {
+			//trace("enenmyManager: deselectActors");
+			for each(var myEnemy:MovieClip in enemies) {
+				//trace("enemy to deselect:",myEnemy);
+				myEnemy.deselectActor();
+			}
+		}
+		
 		public override function getArrayLength():int{
 			return enemies.length;
 		}
@@ -113,6 +122,7 @@
 			return enemies;
 		}
 		
+		//shitty placeholder enemy creation
 		public static function createNewEnemy():void {
 			var AFSenemy:AFSEnemy = new AFSEnemy();
 			var goonEnemy:GoonEnemy = new GoonEnemy();
@@ -124,13 +134,14 @@
 			AFSenemy.x = 350;
 			AFSenemy.y = 5;
 			goonEnemy.x = 450;
-			goonEnemy.y = 75;
+			goonEnemy.y = 0;
 			tankEnemy.x = 550;
 			tankEnemy.y = 75;
 			//var enemyGraphics = enemyFactory.GenerateBody();
 		
 		}
 		
+		//another shiity placeholder enemy creation
 		public static function createNewRandomEnemy():void {
 			var AFSenemy:AFSEnemy = new AFSEnemy();
 			var Goonenemy:GoonEnemy = new GoonEnemy();

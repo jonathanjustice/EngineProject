@@ -3,7 +3,7 @@
 	import utilities.Mathematics.MathFormulas;
 	import utilities.Input.KeyInputManager;
 	import flash.utils.getTimer;
-	public class Enemy extends Actor{
+	public class Enemy extends SelectableActor{
 		
 		//private var gameContainer;
 		private var velocityMultiplier:Number=15;
@@ -30,7 +30,7 @@
 		
 		public function setUp():void{
 			addActorToGameEngine();
-			defineGraphics();
+			//defineGraphics("frank");
 			//trace(get_availableForTargeting());
 		}
 		

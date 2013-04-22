@@ -7,6 +7,7 @@
     import flash.filters.BitmapFilter;
     import flash.filters.BitmapFilterQuality;
     import flash.filters.GlowFilter;
+	import utilities.Input.MouseInputManager;
 	public class SelectableActor extends Actor{
 		private var isSelected:Boolean = false;
 		public function SelectableActor() {
@@ -15,7 +16,16 @@
 			this.addEventListener(MouseEvent.CLICK, clickedActor);
 		}
 		
+		public function addClickability_onLoadComplete(graphic:MovieClip):void {
+			//trace("SelectableActor TYPE:",this);
+			graphic.mouseChildren = true;
+			graphic.mouseEnabled = true;
+			graphic.addEventListener(MouseEvent.CLICK, clickedActor);
+		}
+		
 		private function clickedActor(event:MouseEvent):void {
+			Main.mouseInputManager.runSelectionLogic(event);
+			//trace("clicked")
 			if (isSelected) {
 				deselectActor();
 			}else {
@@ -23,14 +33,27 @@
 			}
 		}
 		
+	/*	private function clickedChildOfActor(event:MouseEvent):void {
+			trace("clicked child")
+			if (isSelected) {
+				deselectActor();
+			}else {
+				selectActor();
+			}
+		}
+		*/
+		
+		/*
+		 *  GLOBAL DE-SLSECT comes from MouseInputManager
+		 */
 		public function deselectActor():void {
-			//trace("deselect");
+			//trace("deselect",this);
 			isSelected = false;
 			removeStroke();
 		}
 		
 		public function selectActor():void {
-			//trace("select");
+			//trace("select",this);
 			isSelected = true;
 			addStroke();
 		}

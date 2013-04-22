@@ -16,7 +16,7 @@
 			xVelocity = -1;
 			setUp();
 			health=1;
-			defineGraphics5();
+			defineGraphics("afs");
 		}
 		
 		public override function updateLoop():void {

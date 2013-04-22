@@ -40,27 +40,52 @@
 			utilities.Engine.Game.gameContainer.addEventListener(MouseEvent.CLICK, clickedStage);
 		}
 		
+		
+		private function clickedStage(event:MouseEvent):void {
+			runSelectionLogic(event);
+		}
+		
 		//determine what to select and unselect	by:
 		//get an array of each of the types objects that the mouse is touching,
 		//take action based on the number of actors being touched	
-		private function clickedStage(event:MouseEvent):void {
+		public function runSelectionLogic(event:MouseEvent):void {
 			
 			//mouse is not touching any avatars
 			if (utilities.Engine.Game.avatarManager.all_items_colliding_with_mouse(utilities.Engine.Game.avatarManager.getArray()).length == 0) {
 				utilities.Engine.Game.avatarManager.deselectActors();
+				trace("Not touching any avatars");
 			}
+			
+			//mouse is not touching any walls
+			if(utilities.Engine.Game.levelManager.all_items_colliding_with_mouse(utilities.Engine.Game.levelManager.getArray()).length == 0) {
+				utilities.Engine.Game.levelManager.deselectActors();
+				trace("Not touching any walls");
+			}
+			
+			//mouse is not touching any enemies
+			if(utilities.Engine.Game.enemyManager.all_items_colliding_with_mouse(utilities.Engine.Game.enemyManager.getArray()).length == 0) {
+				utilities.Engine.Game.enemyManager.deselectActors();
+				trace("Not touching any enemies");
+			}
+			
 			//mouse is touching more than 1 avatar
 			if (utilities.Engine.Game.avatarManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.avatarManager.getArray()).length == 1) {
 				var avatarsToDeselect:Array = new Array();
 				avatarsToDeselect = utilities.Engine.Game.avatarManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.avatarManager.getArray());
-				for each(var actor1:SelectableActor in avatarsToDeselect) {
+				for each(var actor0:SelectableActor in avatarsToDeselect) {
+					actor0.deselectActor();
+				}
+			}
+			
+			//mouse is touching more than 1 enemy
+			if (utilities.Engine.Game.enemyManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.enemyManager.getArray()).length == 1) {
+				var enemiesToDeselect:Array = new Array();
+				enemiesToDeselect = utilities.Engine.Game.enemyManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.enemyManager.getArray());
+				for each(var actor1:SelectableActor in enemiesToDeselect) {
 					actor1.deselectActor();
 				}
 			}
-			//mouse is not touching any walls
-			if(utilities.Engine.Game.levelManager.all_items_colliding_with_mouse(utilities.Engine.Game.levelManager.getArray()).length == 0) {
-				utilities.Engine.Game.levelManager.deselectActors();
-			}
+			
 			//mouse is touching more than 1 wall
 			if (utilities.Engine.Game.levelManager.all_items_selected_except_the_one_that_was_just_clicked(utilities.Engine.Game.levelManager.getArray()).length == 1) {
 				var wallsToDeselect:Array = new Array();

@@ -32,7 +32,7 @@
 		
 		public function setUp():void{
 			addActorToGameEngine();
-			defineGraphics();
+			defineGraphics("frank");
 			this.x = 750;
 			this.y = 125;
 			setHitBoxWidth(100);

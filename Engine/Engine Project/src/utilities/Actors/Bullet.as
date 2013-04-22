@@ -43,7 +43,7 @@ package utilities.Actors{
 			//addActorToGameEngine(utilities.Engine.Game.bulletManager);
 			setInitialLocationAndVector();
 			addActorToGameEngine();
-			defineGraphics();
+			defineGraphics("frank");
 		}
 		
 		//the enter frame, does everything

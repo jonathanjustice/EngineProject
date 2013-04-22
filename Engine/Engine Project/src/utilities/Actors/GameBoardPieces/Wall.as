@@ -9,10 +9,9 @@
 		}
 		
 		public function setUp():void{
-			defineGraphics3();
+			defineGraphicsDefaultRectangle();
 			addActorToGameEngine();
 			setPreviousPosition();
-			
 		}
 		
 		public function updateLoop():void{

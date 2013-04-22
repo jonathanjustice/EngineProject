@@ -11,7 +11,7 @@
 		private var chestGraphic:MovieClip=new MovieClip();
 		private var chestType:String = "Basic";
 		public function TreasureChest(){
-			defineGraphics();
+			defineGraphics("frank");
 		}
 		
 		public function updateLoop():void{

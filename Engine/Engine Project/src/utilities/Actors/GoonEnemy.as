@@ -23,7 +23,7 @@
 			xVelocity = -5;
 			setUp();
 			health=1;
-			defineGraphics4();
+			defineGraphics("goon");
 		}
 		
 		public override function updateLoop():void {

@@ -7,7 +7,7 @@
 		}
 		
 		public function setUp():void{
-			defineGraphics();
+			defineGraphics("frank");
 		}
 			
 		/*public function defineProperties(){

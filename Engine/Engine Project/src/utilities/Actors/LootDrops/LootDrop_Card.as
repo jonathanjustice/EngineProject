@@ -10,7 +10,7 @@
 		}
 		
 		public function setUp():void{
-			defineGraphics();
+			defineGraphics("frank");
 		}
 			
 		public override function defineProperties():void{

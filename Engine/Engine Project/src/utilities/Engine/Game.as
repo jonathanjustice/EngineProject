@@ -225,8 +225,10 @@
 			return gameContainerPoint;
 		}
 		
-		public static function deselectAllActors():void{
+		public static function deselectAllActors():void {
+			trace("Game: deselectAllActors");
 			avatarManager.deselectActors();
+			enemyManager.deselectActors();
 		}
 	}
 }

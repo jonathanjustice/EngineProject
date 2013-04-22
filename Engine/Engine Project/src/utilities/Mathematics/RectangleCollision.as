@@ -55,7 +55,7 @@ package utilities.Mathematics{
 				collisionSide = "right";
 			}
 			else{
-				trace("else, this should never fire, if it does, WHAT DID YOU DO?");
+				//trace("else, this should never fire, if it does, WHAT DID YOU DO?");
 				//movable.y = stationary.y - movable.height - collisionEjectDistance;
 			}
 			return collisionSide;

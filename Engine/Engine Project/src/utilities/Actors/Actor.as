@@ -24,7 +24,7 @@
 		private var previousPosition:Point = new Point(0,0);
 		private var quadTreeNode:int;
 		private var weaponStats:Object;
-		public var actorGraphic:MovieClip;
+		private var actorGraphic:MovieClip;
 		private var target:MovieClip;
 		private var hasTarget:Boolean = false;
 		public var health:Number = 1;
@@ -147,47 +147,19 @@
 		
 		//create the grapic for the actor
 		//uses a default vector rectangle if nothing else is defined 
-		public function defineGraphics():void{
+		//filepath is passed in from the actor type
+		//graphicsElement handles the loading, poorly :(
+		public function defineGraphics(filePath:String):void {
+			//trace("filePath:",filePath);
 			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
-			actorGraphic.loadSwf();
+			actorGraphic.loadSwf(filePath,this);
 			this.addChild(actorGraphic);
 		}
 		
-		public function defineGraphics2():void{
+		//only used for placeholder graphics where a swf or png does not exist yet
+		public function defineGraphicsDefaultRectangle():void{
 			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
-			actorGraphic.drawGraphic2();
-			this.addChild(actorGraphic);
-			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
-			//trace("actorGraphic.width",actorGraphic.width);
-		}
-		
-		public function defineGraphics3():void{
-			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
-			actorGraphic.drawGraphic3();
-			this.addChild(actorGraphic);
-			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
-		//	trace("actorGraphic.width",actorGraphic.width);
-		}
-		
-		public function defineGraphics4():void{
-			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
-			actorGraphic.drawGraphic4();
-			this.addChild(actorGraphic);
-			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
-		//	trace("actorGraphic.width",actorGraphic.width);
-		}
-		
-		public function defineGraphics5():void{
-			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
-			actorGraphic.drawGraphic5();
-			this.addChild(actorGraphic);
-			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
-		//	trace("actorGraphic.width",actorGraphic.width);
-		}
-		
-		public function defineGraphics6():void{
-			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
-			actorGraphic.drawGraphic6();
+			actorGraphic.drawGraphicDefaultRectangle();
 			this.addChild(actorGraphic);
 			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
 		//	trace("actorGraphic.width",actorGraphic.width);
