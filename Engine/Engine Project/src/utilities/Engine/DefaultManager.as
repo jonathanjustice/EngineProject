@@ -40,7 +40,7 @@
 		
 		//gives you all the items that touch the mouse
 		public function all_items_colliding_with_mouse(array:Array):Array {
-			trace("all items colliding with mouse");
+			//trace("all items colliding with mouse");
 			var colldingWithMouse:Array = new Array();
 			var mousePoint:Point = new Point();
 				mousePoint = Main.getMouseCoordinates();

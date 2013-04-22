@@ -20,8 +20,8 @@ package utilities.Actors{
 		
 		//private var gameContainer;
 		private var speed:Number=15;
-		private var xVelocity:Number=0;//velocity
-		private var yVelocity:Number=0;
+		//private var xVelocity:Number=0;//velocity
+		//private var yVelocity:Number=0;
 		private var velocityMultiplier:Number=20;//used for setting initialy velocity
 		private var pausedTime:Number = 0;//for pausing the game
 		private var gamePausedAtTime:Number = 0;

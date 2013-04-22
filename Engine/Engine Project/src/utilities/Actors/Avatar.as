@@ -2,9 +2,10 @@
 	import utilities.Mathematics.MathFormulas;
 	import utilities.Mathematics.QuadTree;
 	import utilities.Engine.Game;
+	import utilities.Engine.Combat.AnimationManager;
 	import utilities.Actors.Actor;
 	import utilities.Input.KeyInputManager;
-	import  utilities.Input.MouseInputManager;
+	import utilities.Input.MouseInputManager;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -17,8 +18,7 @@
 		private var myAngle:Number=0;
 		private var velocityIncrease:Number=12;
 		private var maxSpeed:Number=100;
-		private var xVelocity:Number=50;//velocity
-		private var yVelocity:Number=50;
+	
 		public var xDiff:Number=0;
 		public var yDiff:Number = 0;
 		private var jumpDamage:int = 1;
@@ -34,7 +34,7 @@
 			addActorToGameEngine();
 			defineGraphics("frank");
 			this.x = 750;
-			this.y = 125;
+			this.y = 25;
 			setHitBoxWidth(100);
 			setHitBoxHeight(100);
 		}
@@ -45,23 +45,28 @@
 		}
 		
 		public function updateLoop():void {
-			getisJumpingFromInputManager();
-			applyGravity(isGravitySystemEnabled);
-			
-			setQuadTreeNode();
-			//get key data
-			getAnglesFromKeyInputManager();
-			
-			//get the velocity
-			getVelocityFromKeyInputManager();
-			//getRotationFromKeyInputManager();
-			//apply the velocities to the avatar
-			applyVelocities();
-			var myPoint:Point = new Point(mouseX,mouseY);
-			myPoint = Main.getMouseCoordinates();
-			//Point_Actor_At_Target(myPoint);
-			
-			//trace("thisX: ",this.x,"thisY:",this.y);
+			if (getIsSwfLoaded() == true) {
+				idleLogic();
+				getisJumpingFromInputManager();
+				applyGravity(isGravitySystemEnabled);
+				
+				setQuadTreeNode();
+				//get key data
+				getAnglesFromKeyInputManager();
+				
+				//get the velocity
+				getVelocityFromKeyInputManager();
+				//getRotationFromKeyInputManager();
+				//apply the velocities to the avatar
+				applyVelocities();
+				var myPoint:Point = new Point(mouseX,mouseY);
+				myPoint = Main.getMouseCoordinates();
+				//Point_Actor_At_Target(myPoint);
+				
+				//trace("thisX: ",this.x,"thisY:",this.y);
+				
+				
+			}
 		}
 		
 		/*public override function Point_Actor_At_Target(target:Point):void{
@@ -75,8 +80,12 @@
 		
 		public function getVelocityFromKeyInputManager():void{
 			Main.keyInputManager.setSimpleVelocityViaKeys();
+			
 			xVelocity = Main.keyInputManager.getMyVelocityX() * velocityIncrease;
-			yVelocity = Main.keyInputManager.getMyVelocityY() * velocityIncrease;
+			yVelocity += Main.keyInputManager.getMyVelocityY() * velocityIncrease;
+			if (Main.keyInputManager.getMyVelocityX() == 0) {
+				xVelocity = 0;
+			}
 		}
 		
 		public function getRotationFromKeyInputManager():void{
@@ -108,6 +117,37 @@
 		
 		public function getInvincibilityDamage():int {
 			return invincibilityDamage;
+		}
+		
+		public function idleLogic():void {
+			//If running, disable idleing & play run 
+			if (xVelocity != 0 && yVelocity == 0) {
+				setIsIdle(false);
+				setIdleTime(0);
+				utilities.Engine.Game.getAnimationManager().updateAnimationState(this, "run");
+				//if you are not moving and have not already started idleing, then idle
+			}else if (xVelocity == 0 && yVelocity == 0 && isJumping == false && getIdleTime() == 0) {
+				utilities.Engine.Game.animationManager.updateAnimationState(this, "idle");
+				setIsIdle(true);
+			}
+			//If idleing, increment idle timer
+			if (getIsIdle()==true) {
+				setIdleTime((getIdleTime() + 1));
+			}
+			
+			if (getIdleTime() >= getMaxIdleTime()) {
+				//if over max idle time, switch to impatient idle
+				setIdleImpatientTime((getIdleImpatientTime() + 1));
+				if (getIdleImpatientTime() == 1) {
+					utilities.Engine.Game.getAnimationManager().updateAnimationState(this,"idleImpatient");
+				}
+				//if over max idle time, switch to idle
+				if (getIdleImpatientTime() == getMaxIdleTime()) {
+					utilities.Engine.Game.getAnimationManager().updateAnimationState(this, "idle");
+					setIdleImpatientTime(0);
+					setIdleTime(0);
+				}
+			}
 		}
 	}
 }

@@ -2,6 +2,7 @@
 	import flash.events.Event;
 	import flash.display.MovieClip;
 	import flash.geom.Point;
+	import utilities.GraphicsElements.Animation;
 	import utilities.Screens.GameContainer;
 	import utilities.Engine.ResourceManager;
 	import utilities.Engine.Builders.LevelBuilder;
@@ -10,6 +11,7 @@
 	import utilities.Engine.Combat.BulletManager;
 	import utilities.Engine.Combat.EnemyManager;
 	import utilities.Engine.Combat.AvatarManager;
+	import utilities.Engine.Combat.AnimationManager;
 	import utilities.Engine.Combat.SaveDataManager;
 	import utilities.Audio.SoundManager;
 	import utilities.Actors.Avatar;
@@ -18,6 +20,7 @@
 	public class Game extends MovieClip{
 		public static var theGame:Game;
 		public static var resourceManager:ResourceManager;
+		public static var animationManager:AnimationManager;
 		public static var avatarManager:AvatarManager;
 		public static var bulletManager:BulletManager;
 		public static var enemyManager:EnemyManager;
@@ -112,6 +115,7 @@
 		}
 		
 		private static function createManagersAndControllers():void {
+			createAnimationManager();
 			createResourceManager();
 			createLevelManager();
 			createLevelBuilder();
@@ -122,6 +126,11 @@
 			createLootManager();
 			createSoundManager();
 			createSaveDataManager();
+			
+		}
+		
+		private static function createAnimationManager():void{
+			animationManager = new AnimationManager();
 		}
 		
 		private static function createResourceManager():void {
@@ -164,7 +173,7 @@
 			saveDataManager = new SaveDataManager();
 		}
 		
-		
+	
 		
 		private static function masterLoop(event:Event):void{
 			if(!gamePaused){
@@ -229,6 +238,10 @@
 			trace("Game: deselectAllActors");
 			avatarManager.deselectActors();
 			enemyManager.deselectActors();
+		}
+		
+		public static function getAnimationManager():AnimationManager {
+			return animationManager;
 		}
 	}
 }

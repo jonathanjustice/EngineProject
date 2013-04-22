@@ -14,7 +14,12 @@
 	import utilities.Mathematics.QuadTree;
 	import flash.geom.Point;
 	
-	public class Actor extends MovieClip{
+	public class Actor extends MovieClip {
+		private var idleImpatientTime:int = 0;
+		private var idleTime:int = 0;
+		private var maxIdleTime:int = 90;
+		private var isIdle:Boolean = true;
+		public var assignedGraphic:Array = new Array();
 		private var markedForDeletion:Boolean=false;
 		private var availableForTargeting:Boolean=true;
 		private var progressBar:MovieClip;
@@ -29,17 +34,22 @@
 		private var hasTarget:Boolean = false;
 		public var health:Number = 1;
 		public var maximumHealth:Number = 1;
-		private var gravity:Number = 4;
-		private var originalGravity:Number = 3;
+		public var gravity:Number = 4;
+		public var originalGravity:Number = 3;
 		private var currentGravity:Number=0;
-		private var gravityModifier:Number = 3;
-		private var maxGravity:Number = 25;
+		private var gravityModifier:Number = 2;
+		private var maxGravity:Number = 10;
 		private var hitBoxWidth:Number = 0;
 		private var hitBoxHeight:Number = 0;
 		private var isInvincible:Boolean = false;
+		private var animationState:String = "idle"
+		private var isSwfLoaded:Boolean = false;
+		public var xVelocity:Number=0;//velocity
+		public var yVelocity:Number=0;
 		
 		public function Actor(){
 			defineWeaponStats();
+			setAnimationState("idle");
 			//trace("Actor:new actor")
 		}
 		
@@ -55,13 +65,13 @@
 				if (currentGravity > maxGravity) {
 					currentGravity = maxGravity
 				}
-				this.y += currentGravity;
+				yVelocity += currentGravity;
 			}
 		}
 		
 		//usually through jumping
 		public function modifiyGravity(gravityModifier:Number):void {
-			currentGravity -= gravityModifier;
+			currentGravity = -gravityModifier;
 		}
 		
 		public function resetGravity():void {
@@ -161,8 +171,7 @@
 			actorGraphic = new utilities.GraphicsElements.GraphicsElement();
 			actorGraphic.drawGraphicDefaultRectangle();
 			this.addChild(actorGraphic);
-			//trace("actorGraphic.width", actorGraphic.newGraphic.width);
-		//	trace("actorGraphic.width",actorGraphic.width);
+			
 		}
 		
 		public function createProgressBar(bar:String):void{
@@ -208,15 +217,54 @@
 		//or maybe I can just determine the type in the factory
 		public function send_Loot_Data_To_Factory():void{
 			LootManager.lootFactory.generateLoot(this.x,this.y);
-			
 		}
 		
-		
+		//this function will thow an undefined object error if runs before the assigned graphic is assigned
+		public function playAnimation(animation:String):void {	
+			this.assignedGraphic[0].swf_child.gotoAndStop(animation);
+			trace("Actor: playAnimation");
+		}
 		
 		/*
 		------------GETTERS & SETTERS
 					
 		*/
+					
+		public function getIsIdle():Boolean {
+			return isIdle;
+		}
+					
+		public function setIsIdle(idleState:Boolean):void {
+			isIdle = idleState;
+		}
+					
+		public function getMaxIdleTime():int {
+			return maxIdleTime;
+		}
+		
+		public function setIdleImpatientTime(time:int):void {
+			idleImpatientTime = time
+		}
+		
+		public function getIdleImpatientTime():int {
+			return idleImpatientTime;
+		}
+					
+		public function getIdleTime():int {
+			return idleTime;
+		}
+		
+		public function setIdleTime(time:int):void {
+			idleTime = time;
+		}
+					
+		public function getAnimationState():String {
+			return animationState;
+		}
+		
+		public function setAnimationState(animState:String):void {
+			animationState = animState;
+		}
 		
 		public function getLocation():Point{
 			var point:Point=new Point(this.x,this.y);
@@ -329,6 +377,14 @@
 		
 		public function testFunction():void{
 			trace(this, "Actor: class exists, probably means you fucked up somewhere else, or you can't access the object you want inside the class.");
+		}
+		
+		public function setIsSwfLoaded(loadState:Boolean):void {
+			isSwfLoaded = loadState;
+		}
+		
+		public function getIsSwfLoaded():Boolean {
+			return isSwfLoaded;
 		}
 	}
 }

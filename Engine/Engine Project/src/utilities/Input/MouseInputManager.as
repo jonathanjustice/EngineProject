@@ -53,19 +53,19 @@
 			//mouse is not touching any avatars
 			if (utilities.Engine.Game.avatarManager.all_items_colliding_with_mouse(utilities.Engine.Game.avatarManager.getArray()).length == 0) {
 				utilities.Engine.Game.avatarManager.deselectActors();
-				trace("Not touching any avatars");
+				//trace("Not touching any avatars");
 			}
 			
 			//mouse is not touching any walls
 			if(utilities.Engine.Game.levelManager.all_items_colliding_with_mouse(utilities.Engine.Game.levelManager.getArray()).length == 0) {
 				utilities.Engine.Game.levelManager.deselectActors();
-				trace("Not touching any walls");
+				//trace("Not touching any walls");
 			}
 			
 			//mouse is not touching any enemies
 			if(utilities.Engine.Game.enemyManager.all_items_colliding_with_mouse(utilities.Engine.Game.enemyManager.getArray()).length == 0) {
 				utilities.Engine.Game.enemyManager.deselectActors();
-				trace("Not touching any enemies");
+				//trace("Not touching any enemies");
 			}
 			
 			//mouse is touching more than 1 avatar
@@ -97,7 +97,7 @@
 			}
 			lastClickedActors.push(event.target);
 			lastClickedCoordinates = Main.getMouseCoordinates();
-			trace("lastClickedCoordinates",lastClickedCoordinates);
+			//trace("MouseInputManager: lastClickedCoordinates",lastClickedCoordinates);
 		}
 		
 		//drag the game container with the mouse

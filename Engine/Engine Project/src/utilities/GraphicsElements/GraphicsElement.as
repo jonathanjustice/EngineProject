@@ -26,7 +26,7 @@
 		 * */
 		private var myGraphic:Sprite = new Sprite(); 
 		public var newGraphic:MovieClip = new MovieClip(); 
-		public var assignedGraphic:MovieClip = new MovieClip(); 
+		//public var assignedGraphic:MovieClip = new MovieClip(); 
 		public var assignedGraphics:Array = new Array();
 		private var currentParent:MovieClip = new MovieClip();
 		
@@ -38,11 +38,13 @@
 		public function assignGraphic(graphic:DisplayObject):void {
 			assignedGraphics.push(graphic);
 			parent.addChild(graphic);
-			//trace("assignedGraphics:", assignedGraphics);
-			parent.removeChild(this);
+			currentParent.assignedGraphic.push(graphic);
 			if (currentParent is SelectableActor) {
 				currentParent.addClickability_onLoadComplete(graphic);
 			}
+			parent.removeChild(this);
+			currentParent.setIsSwfLoaded(true);
+			
 		}
 		
 		//loads a swf based on the filePath from the actor type

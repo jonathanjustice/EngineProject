@@ -11,8 +11,8 @@
 		private var xpToApply:int=0;
 		private var spawnTime:Number;
 		private var lifeSpan:Number = 2;//3 seconds
-		public var xVelocity:Number=0;//velocity
-		public var yVelocity:Number=0;
+		//public var xVelocity:Number=0;//velocity
+		//public var yVelocity:Number=0;
 		private var numberOfWallsBeingTouched:int = 0;
 		private var isRechargingHealth:Boolean = false;
 		private var rechargeHealthTimer:int = 0;
