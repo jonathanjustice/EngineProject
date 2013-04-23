@@ -3,6 +3,7 @@
 	import utilities.Engine.DefaultManager;
 	import utilities.Actors.Avatar;
 	import utilities.Engine.LevelManager;
+	import utilities.Engine.Combat.PowerupManager;
 	import utilities.Actors.GameBoardPieces.Wall;
 	import utilities.Mathematics.RectangleCollision;
 	import flash.geom.Point;
@@ -35,6 +36,19 @@
 		public override function updateLoop():void{
 			for each(var myAvatar:Avatar in avatars){
 				myAvatar.updateLoop();
+				
+				for (var a:int = 0; a < PowerupManager.powerups.length; a++) {
+					if (utilities.Mathematics.RectangleCollision.simpleIntersection(myAvatar, PowerupManager.powerups[a]) != false) {
+						
+						myAvatar.toggleDoubleJump(true);
+						trace("1111111111111",PowerupManager.powerups[a]);
+						trace("22222222222222",PowerupManager.powerups[a].getPowerupType());
+						myAvatar.applyPowerup(PowerupManager.powerups[a].getPowerupType());
+						PowerupManager.powerups[a].takeDamage(1);
+						PowerupManager.powerups[a].checkForDeathFlag();
+					}
+				}
+				
 				//for some horrible ass backwards reason, I included the level itself in the same array as the walls inside the level, so the iteration needs to start at 1
 				//this is unnacceptable and needs to get fixed asap because it is super confusing and inconsistent.
 				for(var i:int = 1; i<LevelManager.levels.length;i++){

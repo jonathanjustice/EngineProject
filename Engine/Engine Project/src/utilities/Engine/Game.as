@@ -2,6 +2,7 @@
 	import flash.events.Event;
 	import flash.display.MovieClip;
 	import flash.geom.Point;
+	import utilities.Engine.Combat.PowerupManager;
 	import utilities.GraphicsElements.Animation;
 	import utilities.Screens.GameContainer;
 	import utilities.Engine.ResourceManager;
@@ -20,6 +21,7 @@
 	public class Game extends MovieClip{
 		public static var theGame:Game;
 		public static var resourceManager:ResourceManager;
+		public static var powerupManager:PowerupManager;
 		public static var animationManager:AnimationManager;
 		public static var avatarManager:AvatarManager;
 		public static var bulletManager:BulletManager;
@@ -115,6 +117,7 @@
 		}
 		
 		private static function createManagersAndControllers():void {
+			createPowerupManager();
 			createAnimationManager();
 			createResourceManager();
 			createLevelManager();
@@ -127,6 +130,10 @@
 			createSoundManager();
 			createSaveDataManager();
 			
+		}
+		
+		private static function createPowerupManager():void {
+			powerupManager = new PowerupManager();
 		}
 		
 		private static function createAnimationManager():void{

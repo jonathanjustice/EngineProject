@@ -14,9 +14,10 @@
 		//private var xVelocity:Number=0;//velocity
 		//private var yVelocity:Number = 0;
 		private var jumpSpeed:Number = 12;
-		private var maxJumpCount:Number = 2;
+		private var maxJumpCount:Number = 1;
 		private var currentJumpCount:Number = 0;
 		private var isJumpingEnabled:Boolean = true;
+		public var isDoubleJumpingEnabled:Boolean = false;
 		public var isJumping:Boolean = false;
 		
 		
@@ -44,6 +45,15 @@
 		public function checkCurrentjumpCount():void {
 			if (currentJumpCount < maxJumpCount) {
 				jump();
+			}
+		}
+		
+		public function toggleDoubleJump(enabled:Boolean):void {
+			if (enabled) {
+				maxJumpCount = 2;
+			}
+			if(!enabled){
+				maxJumpCount = 1;
 			}
 		}
 		

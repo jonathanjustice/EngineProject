@@ -25,6 +25,9 @@
 		private var invincibilityDamage:int = 5;
 		private var isGravitySystemEnabled:Boolean = true;
 		
+		private var isInvincibilityEnabled:Boolean = false;
+		private var isShootingEnabled:Boolean = false;
+		
 		public function Avatar(){
 			setUp();
 			//addStroke();
@@ -117,6 +120,20 @@
 		
 		public function getInvincibilityDamage():int {
 			return invincibilityDamage;
+		}
+		
+		public function applyPowerup(type:String):void {
+			switch(type) {
+				case "shoot":
+					isShootingEnabled = true;
+					break;
+				case "invincible":
+					isInvincibilityEnabled = true;
+					break;
+				case "doubleJump":
+					isDoubleJumpingEnabled = true;
+					break;
+			}
 		}
 		
 		public function idleLogic():void {

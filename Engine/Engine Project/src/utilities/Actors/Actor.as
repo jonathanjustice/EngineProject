@@ -112,11 +112,16 @@
 			utilities.Engine.Game.gameContainer.removeChild(actor);
 			actor.setTargetToFalse();
 		}
+		
 		public function takeDamage(amount:Number):void{
 			this.health -= amount;
+			checkForDamage();
+			trace("Actor: takeDamage: actor:", this);
+			trace("Actor: takeDamage: health:",health);
 		}
 		
-		public function checkForDamage():void{
+		public function checkForDamage():void {
+			//trace("Actor: checkForDamage: actor:",this);
 			if(health <= 0){
 				markDeathFlag();
 			}
@@ -128,6 +133,7 @@
 			availableForTargeting = false;//prevent null reference errors
 		}
 		
+		//this is kinda bad, could be more abstract. I don't think i should have to make a billion cases for each and every item in the game
 		//determine what needs to be deleted and then delete it
 		public function checkForDeathFlag():void{
 			if(markedForDeletion){
@@ -142,6 +148,8 @@
 				}
 				else if(this is TreasureChest){
 					removeActorFromGameEngine(this,Game.lootManager.getTreasureChestArray());
+				}else if(this is Powerup_default){
+					removeActorFromGameEngine(this,Game.powerupManager.getArray());
 				}/*
 				else if(this == CardDrop){
 					//removeActorFromGameEngine(this,Game.lootManager.getArray());;
@@ -222,7 +230,7 @@
 		//this function will thow an undefined object error if runs before the assigned graphic is assigned
 		public function playAnimation(animation:String):void {	
 			this.assignedGraphic[0].swf_child.gotoAndStop(animation);
-			trace("Actor: playAnimation");
+			//trace("Actor: playAnimation");
 		}
 		
 		/*

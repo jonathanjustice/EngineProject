@@ -19,6 +19,9 @@
 		private var goon:String = new String("../src/assets/swf_goon.swf");
 		private var afs:String = new String("../src/assets/swf_afs.swf");
 		private var tank:String = new String("../src/assets/swf_tank.swf");
+		private var powerup_doubleJump:String = new String("../src/assets/swf_powerupDoubleJump.swf");
+		private var powerup_invincible:String = new String("../src/assets/swf_powerupInvincible.swf");
+		private var powerup_shoot:String = new String("../src/assets/swf_powerupShoot.swf");
 	//private var wall:String = new String("../src/assets/swf_wall.swf");
 		
 		/*
@@ -65,6 +68,15 @@
 					break;
 				case "wall":
 					//filePath = wall;
+					break;
+				case "powerup_doubleJump":
+					filePath = powerup_doubleJump;
+					break;
+				case "powerup_invincible":
+					filePath = powerup_invincible;
+					break;
+				case "powerup_shoot":
+					filePath = powerup_shoot;
 					break;
 				
 				
